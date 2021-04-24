@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage{url} %for proper url entries
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Introduction to Machine Learning Midterm}, pdfauthor={Nhut-Nam Le}, pdfsubject={troduction to Machine Learning}, pdfkeywords={report, exercises}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+%\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+\usepackage[utf8]{vietnam}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage{pythonhighlight}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\newcommand\T{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+
+\newcommand{\foo}{\hspace{-2.3pt}$\bullet$ \hspace{5pt}}
+
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\setlength{\parindent}{15pt}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\lhead[<even output>]{Nhập môn Học Máy}
+\rhead[<even output>]{Báo cáo Giữa kỳ}
+\title{research-outline}
+\author{Nhut-Nam Le}
+\date{2021}
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			% Top of the page
+			\large{\textbf{ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐHQG-HCM\\KHOA CÔNG NGHỆ THÔNG TIN\\BỘ MÔN KHOA HỌC MÁY TÍNH}}\\
+			\includegraphics[width=0.75\textwidth]{images/khtn.png}\\
+			% Title
+			\large \textbf{NHẬP MÔN HỌC MÁY}\\[0.1in]
+			\huge \textbf{BÁO CÁO ĐỒ ÁN CUỐI KỲ}\\[0.1in]
+			\huge \textbf{TÌM HIỂU: NHẬN DẠNG GIỌNG NÓI BẰNG SÓNG ÂM THÔ VỚI SINCNET}\\[0.1in]
+			\vfill
+			\normalsize
+			\normalsize
+			% Lecturers
+			\textbf{Giảng viên lý thuyết}\\
+			{\textbf{TS.} Bùi Tiến Lên}\\[0.1in]
+			% Teacher Assistant
+			\textbf{Giảng viên hướng dẫn}\\
+			\vspace{0.1in}
+			{Dương Nguyễn Thái Bảo, Nguyễn Ngọc Đức, Nguyễn Tiến Huy, Lê Thanh Phong}\\[0.1in]
+			\textbf{Sinh viên thực hiện} \\
+			\vspace{0.1in}
+			% Submitted by
+			{Vương Gia Bảo, Ngô Xuân Kiên, Lê Nhựt Nam, Nguyễn Viết Dũng}\\[0.1in]
+			% Date time when written report
+			\vfill
+			Tháng 4 năm 2021
+		\end{center}
+	\end{titlepage}
+	\newpage
+	% End Title4
+	
+	\pagenumbering{roman} %numbering before main content starts
+	\cleardoublepage
+	%\pagebreak
+	\phantomsection
+	\addcontentsline{toc}{section}{Lời cảm ơn}
+	\section*{Lời cảm ơn}
+	\vspace{1.0in}
+	\begingroup
+	\setlength{\parindent}{0pt}
+	\qquad Trong quá trình thực hiện đồ án này, chúng em đã nhận được rất nhiều sự giúp đỡ cũng như hỗ trợ từ các thầy cô Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM và các bạn bè trong lớp Nhập môn Học Máy. Em xin bày tỏ lòng cảm ơn chân thành đến mọi người vì đã giúp đỡ hướng dẫn, chỉ bảo rất tận tình.
+	
+	\qquad Đặc biệt, em xin bày tỏ lòng biết ơn sâu sắc đến các thầy cô khoa Công nghệ Thông tin, cụ thể hơn là thầy Bùi Tiến Lên và các thầy hướng dẫn đã giảng dạy rất nhiệt, cung cấp nhiều slides, tài nguyên học tập cần thiết, tạo điều kiện tốt nhất để bản thân em có thể hoàn thành được đồ án này.
+		
+	\qquad Trong quá trình, viết báo cáo này, bản thân em không thể tránh khỏi nhiều sai sót về mặt chuyên môn phân tích thuật toán, đọc hiểu và dịch thuật các từ tiếng Anh chuyên ngành Khoa học Máy tính. Em mong nhận được góp ý để hoàn thiện hơn đối với đồ án này, cũng như rút kinh nghiệm cho những đồ án, những báo cáo kế tiếp.
+	
+	\vspace{1.0in}
+	\textbf{Đại học Khoa học Tự nhiên, ĐHQG-HCM.}\\
+	Lê Nhựt Nam\\
+	Tháng 4 năm 2021\\
+	\endgroup
+	
+	\newpage
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic} %reset numbering to normal for the main content
+	\setcounter{secnumdepth}{0}
+	
+	
+	\nocite{*}
+	\bibliography{references}\newpage\cleardoublepage
+	\bibliographystyle{plain}
+
+\end{document}

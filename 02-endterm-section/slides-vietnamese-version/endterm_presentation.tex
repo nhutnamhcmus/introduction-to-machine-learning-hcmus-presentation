@@ -1,0 +1,60 @@
+\documentclass[11pt]{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{booktabs}
+
+%
+\author{Vương Gia Bảo, Nguyễn Viết Dũng, Ngô Xuân Kiên, Lê Nhựt Nam}
+\title{NHẬP MÔN MÁY HỌC \newline  TRÌNH BÀY VỀ BÀI BÁO "Speaker Recognition from Raw Waveform with SincNet"}
+\institute{Đại học Khoa học Tự nhiên, Đại học Quốc gia TP HCM} 
+
+
+%
+\setbeamertemplate{caption}[numbered]
+% \setbeamertemplate{footline}[frame number]
+% footer
+\makeatletter
+\setbeamertemplate{footline}
+{
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=1\paperwidth,ht=2.25ex,dp=1ex,right]{institute in head/foot}%
+			\usebeamerfont{title in head/foot} 
+			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+	\end{beamercolorbox}}%
+}
+\makeatother
+%
+\newcommand{\argmax}{\arg\!\max}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Nội dung trình bày}
+\tableofcontents
+\end{frame}
+
+\section{Tài liệu tham khảo}
+\begin{frame}{Tài liệu tham khảo}
+	\nocite{*}
+	\bibliography{references}\newpage\cleardoublepage
+	\bibliographystyle{plain}
+\end{frame}
+
+
+\begin{frame}{Q\&A}
+	\begin{center}
+		\Huge Cảm ơn thầy và các bạn đã theo dõi và lắng nghe
+	\end{center}
+\end{frame}
+
+\end{document}
