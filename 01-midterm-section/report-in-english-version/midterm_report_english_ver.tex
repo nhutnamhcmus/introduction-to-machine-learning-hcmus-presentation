@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage[pdftex]{graphicx} %for embedding images
+\usepackage{url} %for proper url entries
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Introduction to Machine Learning Midterm}, pdfauthor={Nhut-Nam Le}, pdfsubject={troduction to Machine Learning}, pdfkeywords={report, exercises}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+%\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{pythonhighlight}
+\usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\newcommand\T{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+
+\newcommand{\foo}{\hspace{-2.3pt}$\bullet$ \hspace{5pt}}
+
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\setlength{\parindent}{15pt}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\lhead[<even output>]{Introduction to Machine Learning - Spring 2021}
+\rhead[<even output>]{Midterm Report}
+\title{research-outline}
+\author{Nhut-Nam Le}
+\date{2021}
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			% Top of the page
+			\large{\textbf{HO CHI MINH UNIVERSITY OF SCIENCE - VIETNAM NATIONAL UNIVERSITY\\FACULTY OF INFORMATION TECHNOLOGY\\DEPARTMENT OF COMPUTER SCIENCE}}\\
+			\includegraphics[width=0.75\textwidth]{images/khtn.png}\\
+			% Title
+			\large \textbf{MIDTERM REPORT FOR SUBJECT PROJECT}\\[0.1in]
+			\huge \textbf{INTRODUCTION TO MACHINE LEARNING}\\[0.1in]
+			\huge \textbf{RESEARCH ABOUT PAPER: SPEAKER RECOGNITION FROM RAW WAVEFORM WITH SINCNET}\\[0.1in]
+			\vfill
+			\normalsize
+			\normalsize
+			% Lecturers
+			\textbf{Lecturers}\\
+			{\textbf{Phd.} Bui Tien Len}\\[0.1in]
+			% Teacher Assistant
+			\textbf{Teacher Assistants \& Lab Lectures}\\
+			\vspace{0.1in}
+			{Duong Nguyen Thai Bao, Nuyen Ngoc Duc, Nguyen Tien Huy, Le Thanh Phong}\\[0.1in]
+			\textbf{Submitted by} \\
+			\vspace{0.1in}
+			% Submitted by
+			{Le Nhut Nam, Nguyen Viet Dung, Ngo Xuan Kien, Vuong Gia Bao}\\[0.1in]
+			% Date time when written report
+			\vfill
+			April, 2021
+		\end{center}
+	\end{titlepage}
+	\newpage
+	% End Title4
+	
+	\pagenumbering{roman} %numbering before main content starts
+	\cleardoublepage
+	%\pagebreak
+	\phantomsection
+	\addcontentsline{toc}{section}{Acknowledgments}
+	\section*{Acknowledgments}
+	\vspace{1.0in}
+	\begingroup
+	\setlength{\parindent}{0pt}
+	\qquad In the process of implementing this project, we have received a lot of help and support from the teachers of the University of Sciences, and friends in the Introduction of Machine Learning class. I would like to express my sincere thanks to everyone for helping guide and instructing very wholeheartedly.
+	
+	In particular, I would like to express my deep gratitude to the teachers of the Information Technology Department, more specifically Mr. Bui Tien Len and the instructors who taught very enthusiastically, providing many necessary learning materials, so that  our team and I can complete this project.
+	
+	In the process of writing this report, I myself cannot avoid many mistakes in terms of algorithm analysis, in understanding about Specialized terms in Computer Science, etc. I hope to receive suggestions to improve more on this project, as well as learn from experience for next projects, the next report.
+	
+	We also would like to thank our families, our friends, our teachers again. If without yours support, we would not be able to complete this project. 
+	
+	\vspace{1.0in}
+	\textbf{University of Science, Vietnam National University, Ho Chi Minh City}\\
+	Le Nhut Nam\\
+	April 2021\\
+	\endgroup
+	
+	\newpage
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic} %reset numbering to normal for the main content
+	\setcounter{secnumdepth}{0}
+	
+	\section{1. Abstract and Introduction about the paper}
+	
+	
+	\section{2. Motivation of Speaker Recognition}
+	
+	\section{3. Problem statement}
+	\qquad We have two big tasks in Speaker Recognition: Speaker Identification task and Speaker Verification task. Speaker identification is the task to identify an unknown speaker from a set of already known speakers: find
+	the speaker who sounds closest to the test sample. When all
+	speakers within a given set are known, it is called closed-set
+	(or in-set) scenario. Alternatively, if the set of known speakers
+	may not contain the potential test subject, it is called open-set
+	(or out-of-set) speaker identification \cite{sztaho2019deep}. In speaker verification, the task is to verify if a speaker, who claims to be of an identity, really is of the identity. In other words, we have to verify if the subject is really who he or she says to be. This means comparing two speech samples/utterances and deciding if they are spoken by the same speakers. This is - in general speaker verification practice - usually done by comparing the test sample to a sample of the given speaker and a universal background model (Reynolds et al., 1995)
+	
+	A summary about input and output for each tasks above. With Speaker Identification task:
+	\begin{itemize}
+		\item Input: User voice/ speech signal
+		\item Output: User identity data
+	\end{itemize}
+	And with Speaker Verification task:
+	\begin{itemize}
+		\item Input: User voice/ speech signal
+		\item Output: Accept/ Deny
+	\end{itemize}
+
+	\section{4. Our team approach and methods of researching this paper}
+	\begin{itemize}
+		\item Find out the main idea about SincNet network architecture, the method mentioned by the authors in the paper.
+		\item Summary, explanation, and proof of the formula learned from the paper.
+		\item Learn how to process data, build models, train models, evaluate models from the official source code of the paper's author.
+		\item Learn, collect, construct data.
+		\item Modify the author's source code to match the current hardware and software that the team has, train the model, evaluate the model, and present results achieved.
+		\item Shows what to learn and do through Video Clip.
+	\end{itemize}
+
+
+
+	\nocite{*}
+	\bibliography{references}\newpage\cleardoublepage
+	\bibliographystyle{plain}
+
+\end{document}
