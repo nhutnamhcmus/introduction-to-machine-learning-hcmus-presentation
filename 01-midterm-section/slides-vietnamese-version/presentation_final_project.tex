@@ -10,8 +10,8 @@
 \usepackage{booktabs}
 
 %
-\author{Vương Gia Bảo, Nguyễn Viết Dũng, Ngô Xuân Kiên, Lê Nhựt Nam}
-\title{NHẬP MÔN MÁY HỌC \newline  TRÌNH BÀY VỀ BÀI BÁO "Speaker Recognition from Raw Waveform with SincNet"}
+\author{Vương Gia Bảo, Nguyễn Viết Dũng\newline Ngô Xuân Kiên, Lê Nhựt Nam}
+\title{NHẬP MÔN MÁY HỌC \newline SPEAKER RECOGNITION FROM \newline RAW WAVEFORM WITH SINCNET}
 \institute{Đại học Khoa học Tự nhiên, Đại học Quốc gia TP HCM} 
 
 
@@ -185,6 +185,7 @@
 			\item Tính hội tụ nhanh: Khả năng hội tụ nhanh hơn CNN, ngay từ những epochs đầu tiên.
 			\begin{figure}[H]
 				\includegraphics[width=0.9\linewidth]{images/fast_convergence.png}
+				\caption{Learning curves}
 			\end{figure}
 		\end{itemize}
 		\end{column}
@@ -232,7 +233,7 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Tính giải nghĩa/ diễn giải: Biểu đồ đáp ứng xung tích lũy của SincNet cho thấy nhiều đặc trưng quan trọng của giọng nói. 
+				\item Tính diễn giải: Biểu đồ đáp ứng xung tích lũy của SincNet cho thấy nhiều đặc trưng quan trọng của giọng nói. 
 				\begin{figure}[H]
 					\includegraphics[width=0.9\linewidth]{images/interpretability.png}
 				\end{figure}
@@ -242,7 +243,6 @@
 \end{frame}
 
 \section{Các kết quả}
-\subsection{Các kết quả thực nghiệm của nhóm tác giả}
 \begin{frame}{Các kết quả đối với tác vụ Speaker Identification}
 \begin{figure}[H]
 	\centering
@@ -271,10 +271,6 @@
 	\end{figure}
 	SincNet hoạt động rất tốt trên DIRHA, so với các kỹ thuật khác, nó luôn có độ lỗi thấp nhất.	
 \end{frame}
-\subsection{Các kết quả thực nghiệm của nhóm}
-\begin{frame}
-	Phần trình bày về chuẩn bị dữ liệu (cho tiếng Anh và \textbf{tiếng Việt}), xây dựng mô hình, các độ đo đánh giá mô hình, đánh giá mô hình, trực quan hóa đánh giá mô hình sẽ được nhóm trình bày về slides Cuối kỳ.
-\end{frame}
 
 \section{Kết luận}
 \begin{frame}{Kết luận}
@@ -290,7 +286,14 @@
 		\item DNN-class tuy có EER thấp nhưng đánh đổi nhiều sự linh hoạt so với d-vectors
 	\end{itemize}
 \end{frame}
-
+\begin{frame}{Kế hoạch dự kiến cuối kỳ}
+	\begin{itemize}
+		\item Chuẩn bị dữ liệu (cho tiếng Anh và \textbf{tiếng Việt}).
+		\item Xây dựng mô hình.
+		\item Trực quan hóa, đánh giá mô hình.
+		\item Nhận xét những kết quả làm được.
+	\end{itemize}
+\end{frame}
 
 \section{Tài liệu tham khảo}
 \begin{frame}{Tài liệu tham khảo}

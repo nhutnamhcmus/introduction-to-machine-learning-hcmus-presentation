@@ -96,15 +96,15 @@
 	\vspace{1.0in}
 	\begingroup
 	\setlength{\parindent}{0pt}
-	\qquad Trong quá trình thực hiện đồ án này, chúng em đã nhận được rất nhiều sự giúp đỡ cũng như hỗ trợ từ các thầy cô Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM và các bạn bè trong lớp Nhập môn Học Máy. Em xin bày tỏ lòng cảm ơn chân thành đến mọi người vì đã giúp đỡ hướng dẫn, chỉ bảo rất tận tình.
+	\qquad Trong quá trình thực hiện đồ án này, chúng em đã nhận được rất nhiều sự giúp đỡ cũng như hỗ trợ từ các thầy cô Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM và các bạn bè trong lớp Nhập môn Học Máy. Chúng em xin bày tỏ lòng cảm ơn chân thành đến mọi người vì đã giúp đỡ hướng dẫn, chỉ bảo rất tận tình.
 	
-	\qquad Đặc biệt, em xin bày tỏ lòng biết ơn sâu sắc đến các thầy cô khoa Công nghệ Thông tin, cụ thể hơn là thầy Bùi Tiến Lên và các thầy hướng dẫn đã giảng dạy rất nhiệt, cung cấp nhiều slides, tài nguyên học tập cần thiết, tạo điều kiện tốt nhất để bản thân em có thể hoàn thành được đồ án này.
+	\qquad Đặc biệt, chúng em xin bày tỏ lòng biết ơn sâu sắc đến các thầy cô khoa Công nghệ Thông tin, cụ thể hơn là thầy Bùi Tiến Lên và các thầy hướng dẫn đã giảng dạy rất nhiệt, cung cấp nhiều slides, tài nguyên học tập cần thiết, tạo điều kiện tốt nhất để chúng em có thể hoàn thành được đồ án này.
 		
-	\qquad Trong quá trình, viết báo cáo này, bản thân em không thể tránh khỏi nhiều sai sót về mặt chuyên môn phân tích thuật toán, đọc hiểu và dịch thuật các từ tiếng Anh chuyên ngành Khoa học Máy tính. Em mong nhận được góp ý để hoàn thiện hơn đối với đồ án này, cũng như rút kinh nghiệm cho những đồ án, những báo cáo kế tiếp.
+	\qquad Trong quá trình, viết báo cáo này, chúng em không thể tránh khỏi nhiều thiếu sót, hy vọng mong nhận được góp ý từ thầy để chúng em tiếp tục hoàn thiện hơn đối với đồ án này, cũng như rút kinh nghiệm cho những đồ án, những báo cáo kế tiếp.
 	
 	\vspace{1.0in}
 	\textbf{Đại học Khoa học Tự nhiên, ĐHQG-HCM.}\\
-	Lê Nhựt Nam\\
+	Vương Gia Bảo, Ngô Xuân Kiên, Lê Nhựt Nam, Nguyễn Viết Dũng\\
 	Tháng 4 năm 2021\\
 	\endgroup
 	
@@ -120,42 +120,32 @@
 	
 	Trong tác vụ nhận dạng, đặc biệt là nhận dạng giọng nói (Voice/ Speech Recognition) gần như là một bài toán khó trong nhiều năm, cần những phương pháp rất phức tạp để có thể giải quyết được. Nhờ vào Học sâu, phương giải phải khả thi, mà cụ thể là với Mạng Neural Tích chập (Convolutional Neural Networks - CNNs) đem lại những kết quả đầy hứa hẹn khi chỉ cần đầu vào trực tiếp là mẫu giọng nói thô. Thay vì sử dụng các tính năng thủ công tiêu chuẩn, CNNs sau này học cách biểu diễn giọng nói cấp thấp từ các dạng sóng, có khả năng cho phép mạng nắm bắt tốt hơn các đặc điểm giọng nói ở dải tần hẹp quan trọng như cao độ và hình dạng.
 	
-	Với mục đích tìm hiểu bài báo khoa học, cũng như tìm hiểu những mô hình, phương pháp Học máy nổi bật gần đây trong những tác vụ quan trọng, mà cụ thể là nhận dạng. Nhóm chúng em quyết định chọn một bài báo khoa học làm tài liệu thực hiện chính cho đồ án môn học
+	Với mục đích tìm hiểu bài báo khoa học, cũng như tìm hiểu những mô hình, phương pháp Học máy nổi bật gần đây trong những tác vụ quan trọng, mà cụ thể là nhận dạng. Nhóm chúng em quyết định chọn một bài báo khoa học liên quan đến Nhận dạng giọng nói và cũng là tài liệu nghiên cứu chính thực hiện chính cho đồ án môn học.
 	
-	Thông tin bài báo
-	\begin{itemize}
-		\item Tên bài báo: Speaker Recognition from Raw Waveform with SincNet
-		
-		\item Tác giả: Mirco Ravanelli và Yoshua Bengio
-		
-		\item Năm công bố: 2019
-		
-		\item eprint: 1808.00158
-		
-		\item archivePrefix: arXiv
-		
-		\item primaryClass: eess.AS
-		
-		\item Source code chính thức: \href{https://github.com/mravanelli/SincNet}{https://github.com/mravanelli/SincNet}
-	\end{itemize}
-
 	\section{2. Động lực nghiên cứu khoa học}
 	\qquad Tính phổ biến của tín hiệu giọng nói, phạm vi ứng dụng có thể có của sinh trắc học (nhân trắc học) giọng nói rộng hơn so với các đặc điểm sinh trắc học thông thường khác. Chúng ta có thể phân biệt ba loại ứng dụng chính tận dụng thông tin sinh trắc học có trong tín hiệu giọng nói như sau:
 	\begin{itemize}
 		\item \textbf{Voice authentication (Xác nhận giọng nói)} (Access control - Điều khiển truy cập, thường là điều khiển từ xa bằng điện thoại) và back-ground recognition (Nhận dạng lý lịch) (natural voice checking - kiểm tra bằng giọng nói tự nhiên).
-		\item \textbf{Speaker detection (Nhận diện người nói)} (ví dụ như: phát hiện danh sách đen trong các tổng đài điện thoại hoặc trong nghe lén và giám sát, …), hay còn được gọi là speaker spotting
-		\item \textbf{Forensic speaker recognition (Nhận dạng người nói trong Pháp y)} (sử dụng giọng nói làm bằng chứng trước tòa án hoặc làm thông tin tình báo trong các cuộc điều tra của cảnh sát hình sự) 
+		\item \textbf{Speaker detection (Nhận diện người nói)} (ví dụ như: phát hiện danh sách đen trong các tổng đài điện thoại hoặc trong nghe lén và giám sát, …), hay còn được gọi là speaker spotting.
+		\item \textbf{Forensic speaker recognition (Nhận dạng người nói trong Pháp y)} (sử dụng giọng nói làm bằng chứng trước tòa án hoặc làm thông tin tình báo trong các cuộc điều tra của cảnh sát hình sự).
 	\end{itemize}
 	\qquad Các phương pháp SOTA dựa trên việc biểu diễn i-vectors của những đoạn giọng nói, cải thiện đáng kể so với mô hình Gaussian Mixture Model-Universal Background Models và sự phát triển của Deep Neural Network đã góp phần giải quyết nhận dạng giọng nói. Tuy nhiên vẫn còn nhiều vấn đề cần phải giải quyết với bài toán này như vấn đề dữ liệu đầu vào, tối ưu độ lỗi, tăng hiệu năng hội tụ và nhất là làm sao thiết kế một mô hình nhỏ gọn, có thể tinh chỉnh được để phù hợp với các ứng dụng của chúng ta.
 	
 	\section{3. Phát biểu bài toán}
+	\qquad Hai tác vụ lớn trong nhận dạng giọng nói là định danh người nói và xác minh người nói.
 	
+	Định danh người nói là nhiệm vụ để xác định một người nói không xác định từ một tập hợp các người nói đã biết: tìm người nói có âm thanh gần nhất với mẫu thử nghiệm. Khi tất cả các người nói trong một tập hợp nhất định đã biết, nó được gọi là kịch bản tập hợp kín (hoặc trong tập hợp). Ngoài ra, nếu bộ người nói đã biết có thể không chứa đối tượng kiểm tra tiềm năng, thì nó được gọi là nhận dạng người nói mở (hoặc ngoài tập).
+	
+	Trong xác minh người nói, nhiệm vụ là xác minh xem người nói, người tuyên bố là có danh tính, có thực sự là danh tính hay không. Nói cách khác, chúng ta phải xác minh xem đối tượng có thực sự là người mà họ nói hay không. Điều này có nghĩa là so sánh hai mẫu giọng nói/ cách phát biểu và quyết định xem chúng có được nói bởi cùng một người nói hay không. Điều này - nói chung là thực hành xác minh người nói - thường được thực hiện bằng cách so sánh mẫu thử nghiệm với một mẫu giọng nói đã cho và một mô hình nền chung.
+	
+	\vspace{0.2in}
+	Tóm tắc đầu vào - đầu ra của bài toán:\newline
 	\textbf{Tác vụ:} Định danh người nói
 	\begin{itemize}
 		\item Đầu vào (Input): Dữ liệu âm thanh giọng nói
 		\item Đầu ra (Output): Danh tính của người nói
 	\end{itemize}
-	\textbf{Tác vụ:} Xác nhận người nói
+	\textbf{Tác vụ:} Xác minh người nói
 	\begin{itemize}
 		\item Đầu vào (Input): Dữ liệu âm thanh giọng nói
 		\item Đầu ra (Output): Đồng ý/ Từ chối
@@ -181,18 +171,18 @@
 	
 	Cung cấp một tập các bộ lọc mà chúng nhỏ gọn và hiệu quả trong việc tùy chỉnh với ứng dụng mà chúng ta muốn.
 	
-	Đây là một sự kết hợp tuyệt vời giữa Học máy (Machine Learning) và Xử lý Tín hiệu số (Digital Signal Processing)
+	Đây là một sự kết hợp tuyệt vời giữa Học máy (Machine Learning) và Xử lý Tín hiệu số (Digital Signal Processing).
 	
 	Bài báo được đăng công khai trên \href{arxiv.org}{arXiv dot org} lần đầu tiên vào năm 2018 bởi hai người Mirco Ravanelli, Yoshua Bengio (ông được xem là một trong 3 vị cha đẻ của phương pháp Deep Learning hiện đại), phiên bản cập nhật gần đây nhất là vào năm 2019 bằng việc thay thế hàm "sinc\_conv" bằng "SincConv\_fast" giúp tăng tốc độ lên 50\% so với phiên bản cũ.
 	
 	\subsubsection{3.1.1 Về nhận dạng giọng nói}
 	\qquad Về lĩnh vực Nhận dạng giọng nói, đây là một lĩnh vực nghiên cứu có nhiều ứng dụng vào thực tiễn đời sống như xác thực sinh trắc học, pháp y, bảo mật, nhận dạng giọng nói và phân cực giọng nói.
 	
-	Hầu hết những giải pháp "state of the art" đều dựa trên việc biểu diễn \textbf{i-vectors} của những đoạn giọng nói, cải thiện đáng kể so với mô hình Gaussian Mixture Model-Universal Background Models (GMM-UBMs).
+	Hầu hết những giải pháp "state of the art" đều dựa trên việc biểu diễn \textbf{i-vectors} của những đoạn giọng nói, cải thiện đáng kể so với mô hình \textbf{Gaussian Mixture Model-Universal Background Models} (GMM-UBMs).
 	
-	Trong những năm gần đây, Trí tuệ Nhân tạo nhất là lĩnh vực Học máy (Machine Learning) đạt được nhiều thành tựu nổi bật là nhờ Học Sâu (Deep Learning). Các mạng học sâu - Deep Neural Networks (DNNs) sử dụng trong những framework i-vector để tính toán thống kê Baum-Welch hoặc trong các khung rút trích đặc trưng theo mức (frame-level feature extraction). Ngoài ra, DNNs còn được dùng trong việc phân tách giọng nói.
+	Trong những năm gần đây, Trí tuệ Nhân tạo nhất là lĩnh vực Học máy (Machine Learning) đạt được nhiều thành tựu nổi bật là nhờ Học Sâu (Deep Learning). Các mạng học sâu - \textbf{Deep Neural Networks} (DNNs) sử dụng trong những framework \textbf{i-vector} để tính toán thống kê \textbf{Baum-Welch} hoặc trong các khung rút trích đặc trưng theo mức (frame-level feature extraction). Ngoài ra, \textbf{DNNs} còn được dùng trong việc phân tách giọng nói.
 	
-	Những kỹ thuật này cần phải tuân theo một số tiêu chuẩn nhất định, ví dụ như: độ mượt của tần số giọng nói có thể làm cản trở việc rút trích một số đặc trưng của giọng nói như cao độ và ngữ âm, .... Để khắc phục chúng, các công trình mới đây thường dùng kỹ thuật spectrogram bins (bin tần số) hoặc dùng cả sóng thô (raw waveform).
+	Những kỹ thuật này cần phải tuân theo một số tiêu chuẩn nhất định, ví dụ như: độ mượt của tần số giọng nói có thể làm cản trở việc rút trích một số đặc trưng của giọng nói như cao độ và ngữ âm, .... Để khắc phục chúng, các công trình mới đây thường dùng kỹ thuật \textbf{spectrogram bins} (bin tần số) hoặc dùng cả sóng thô (raw waveform).
 	
 	\subsubsection{3.1.2 Về Convolutional Neural Networks}
 	\qquad Convolutional Neural Networks - CNNs là một lựa chọn thích hợp với đầu vào là những sóng thô, nó kiến trúc phổ biến nhất để xử lý các mẫu giọng nói thô nhờ vào chia sẻ trọng số, bộ lọc cục bộ và tổng hợp giúp khám phá các biểu diễn dữ liệu và bất biến.
@@ -204,7 +194,7 @@
 		\caption{Minh họa chuỗi giọng nói có số chiều rất lớn. Ảnh được lấy từ video A bref introduction to SincNet thực hiện bởi Giáo sư Mirco Ravanelli}
 		\label{fig:writing-thesis}
 	\end{figure}
-	Ở lớp này, dữ liệu đầu vào là những chuỗi Speech/Audio có số chiều rất cao, ví dụ như: cứ mỗi giây thì ta lại có đến 16000 đặc trưng. Bằng những kỹ thuật "bằng tay" ngày xưa như FBANKs hay MFCCs thì ta có thể giúp nó giảm xuống còn 4000 đặc trưng mỗi giây, nhưng như thế vẫn còn rất nhiều!
+	Ở lớp này, dữ liệu đầu vào là những chuỗi Speech/Audio có số chiều rất cao, ví dụ như: cứ mỗi giây thì ta lại có đến 16000 đặc trưng. Bằng những kỹ thuật thủ công ngày xưa như FBANKs hay MFCCs thì ta có thể giúp nó giảm xuống còn 4000 đặc trưng mỗi giây, nhưng như thế vẫn còn rất nhiều!
 	
 	Những đặc trưng trong phổ tần số có thể nhận ra bằng mắt thường nhưng lại bị mất đi nếu chúng ta làm mịn chúng.
 	\begin{figure}[H]
@@ -328,7 +318,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{charts/SincNet.png}
+		\includegraphics[width=.9\textwidth]{charts/SincNet.png}
 		\caption{Kiến trúc mạng Sicnet}
 		\label{fig:writing-thesis}
 	\end{figure}
@@ -388,7 +378,7 @@
 	\end{figure}
 	
 	\subsection{3.3 Các công trình liên quan đến bài báo}
-	Liệt kê danh sách các công trình liên quan đến bài báo
+	Liệt kê danh sách các công trình liên quan đến bài báo\newline
 	\textbf{Một số công trình trước đây khai thác đặc trưng cường độ phổ:}
 	\begin{itemize}
 		\item C. Zhang, K. Koishida, and J. Hansen, “Textindependent speaker verification based on triplet convolutional neural network embeddings,” IEEE/ACM Trans. Audio, Speech and Lang. Proc., vol. 26, no. 9,
@@ -643,9 +633,9 @@
 
 	\subsection{5.3 Phân công công việc}
 	\begin{center}
-		\begin{tabular}{ | l | l | l | p{5cm} | p{3cm} |}
+		\begin{tabular}{ | l | l | l | p{5.5cm} | p{3cm} |}
 			\hline
-			STT & MSSV & Họ tên & Nội dung công việc & Mức độ hoàn thành công việc  \T\B\\ \hline
+			STT & MSSV & Họ tên & Nội dung công việc & Mức độ hoàn thành  \\ \hline
 			1 & 18120009 & Vương Gia Bảo & Thu thập dữ liệu, đọc hiểu source, báo cáo Introduction Paper &  100\%\T\B\\ \hline
 			2 & 18120045 & Ngô Xuân Kiên & Thu thập dữ liệu, đọc hiểu source, báo cáo Related Work Paper & 100\%\T\B \\ \hline
 			3 & 18120061 & Lê Nhựt Nam & Thu thập dữ liệu, đọc hiểu source, báo cáo, SincNet Architecture, Slides thuyết trình, Midterm Report & 100\%\T\B \\ \hline
