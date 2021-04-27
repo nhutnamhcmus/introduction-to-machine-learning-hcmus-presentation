@@ -95,10 +95,20 @@
 \end{frame}
 \begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
 	\begin{itemize}
-		\item Sự biến mất độ dốc đạo hàm - vanishing gradient
+		\item Những đặc trưng giọng nói có thể bị mất đi trong quá trình xử lý sóng thô.
 		\begin{figure}[H]
 			\includegraphics[width=0.9\linewidth]{images/perceptual_evidence.png}
 			\caption{A brief introduction to SincNet - Mirco Ravanelli}
+			\label{fig:writing-thesis}
+		\end{figure}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
+	\begin{itemize}
+		\item Sự biến mất độ dốc đạo hàm - vanishing gradient
+		\begin{figure}[H]
+			\includegraphics[width=0.75\linewidth]{images/Vanishing-Gradients-in-DNN.png}
+			\caption{Vanishing Gradient problem in Deep Neural Networks}
 			\label{fig:writing-thesis}
 		\end{figure}
 	\end{itemize}
@@ -172,7 +182,7 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 		\begin{itemize}
-			\item Tính hội tụ nhanh
+			\item Tính hội tụ nhanh: Khả năng hội tụ nhanh hơn CNN, ngay từ những epochs đầu tiên.
 			\begin{figure}[H]
 				\includegraphics[width=0.9\linewidth]{images/fast_convergence.png}
 			\end{figure}
@@ -188,14 +198,11 @@
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item Tính hiệu quả
-				\begin{figure}[H]
-					\includegraphics[width=0.45\linewidth]{images/g_symmetric.png}
-				\end{figure}
-				\item 	Các hàm kernel $g(.)$ là đối xứng nên chỉ cần thực hiện phép tích chập trên một phần filter. 
-				\item Điều này sẽ tiết kiệm 50\% việc tính toán.
-			\end{itemize}
+			Tính hiệu quả
+			\begin{figure}[H]
+				\includegraphics[width=0.35\linewidth]{images/g_symmetric.png}
+			\end{figure}
+			Các hàm kernel $g(.)$ là đối xứng nên chỉ cần thực hiện phép tích chập trên một phần filter $\Leftrightarrow$ Điều này sẽ tiết kiệm 50\% việc tính toán.
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -225,7 +232,7 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Tính giải nghĩa/ diễn giải
+				\item Tính giải nghĩa/ diễn giải: Biểu đồ đáp ứng xung tích lũy của SincNet cho thấy nhiều đặc trưng quan trọng của giọng nói. 
 				\begin{figure}[H]
 					\includegraphics[width=0.9\linewidth]{images/interpretability.png}
 				\end{figure}
@@ -235,6 +242,7 @@
 \end{frame}
 
 \section{Các kết quả}
+\subsection{Các kết quả thực nghiệm của nhóm tác giả}
 \begin{frame}{Các kết quả đối với tác vụ Speaker Identification}
 \begin{figure}[H]
 	\centering
@@ -263,6 +271,10 @@
 	\end{figure}
 	SincNet hoạt động rất tốt trên DIRHA, so với các kỹ thuật khác, nó luôn có độ lỗi thấp nhất.	
 \end{frame}
+\subsection{Các kết quả thực nghiệm của nhóm}
+\begin{frame}
+	Phần trình bày về chuẩn bị dữ liệu (cho tiếng Anh và \textbf{tiếng Việt}), xây dựng mô hình, các độ đo đánh giá mô hình, đánh giá mô hình, trực quan hóa đánh giá mô hình sẽ được nhóm trình bày về slides Cuối kỳ.
+\end{frame}
 
 \section{Kết luận}
 \begin{frame}{Kết luận}
@@ -278,6 +290,7 @@
 		\item DNN-class tuy có EER thấp nhưng đánh đổi nhiều sự linh hoạt so với d-vectors
 	\end{itemize}
 \end{frame}
+
 
 \section{Tài liệu tham khảo}
 \begin{frame}{Tài liệu tham khảo}

@@ -42,6 +42,49 @@
 \begin{frame}{Nội dung trình bày}
 \tableofcontents
 \end{frame}
+\section{Chuẩn bị dữ liệu - Data Preparation}
+\subsection{Về \textbf{Tiếng Anh}}
+\begin{frame}{Chuẩn bị dữ liệu}
+	Về \textbf{Tiếng Anh}
+	\begin{itemize}
+		\item Với TIMIT, ta có một kho ngữ liệu với 462 người nói, các khoảng không phải lời nói ở đầu và cuối mỗi câu đã bị xóa, những tập tin về nội dung câu nói của TIMIT cũng được loại bỏ. Sau khi tinh chỉnh toàn bộ dữ liệu, nhóm dùng 5 câu nói của mỗi người nói để huấn luyện, 3 câu nói của mỗi người nói dùng để kiểm tra.
+		\item Với LibriSpeech, những phần với độ im lặng bên trong kéo dài hơn 125 ms được
+		chia thành nhiều phần nhỏ. Việc chia tập huấn luyện (training set), tập kiểm tra (testing set) là ngẫu nhiên bằng cách chọn 12-15 giây dữ liệu huấn luyện của mỗi người nói và các câu kiểm tra kéo dài từ 2-6 giây.
+	\end{itemize}
+\end{frame}
+\subsection{Về \textbf{Tiếng Việt}}
+\begin{frame}{Chuẩn bị dữ liệu}
+	Về \textbf{Tiếng Việt}: Nhóm dùng tập dữ liệu Son et al. Dataset
+	\begin{itemize}
+		\item Nguồn dữ liệu từ bài báo Vietnamese Speaker Authentication Using Deep Models
+		\item Dung lượng của tập dữ liệu: 535 MB
+		\item Số mẫu trong tập dữ liệu: 400 mẫu
+		\item Bộ dữ liệu gồm: hai tập Men và Women, mỗi tập con chứa 10 thư mục người nói. Mỗi thư mục người nói chứa 20 đoạn ghi âm, chia ra Long và Short (mỗi loại 10 đoạn)
+		\item Điểm hạn chế: Bộ dữ liệu có kích thước khá nhỏ
+	\end{itemize}
+\end{frame}
+\section{Xây dựng thực nghiệm mô hình SincNet}
+\subsection{Xây dựng thực nghiệm với tiếng Anh}
+\begin{frame}
+\end{frame}
+\subsection{Xây dựng thực nghiệm với tiếng Việt}
+\begin{frame}
+\end{frame}
+\section{Đăng ký - Enrollment}
+\subsection{Đăng ký mô hình tiếng Anh}
+\begin{frame}
+\end{frame}
+\subsection{Đăng ký mô hình tiếng Việt}
+\begin{frame}
+\end{frame}
+\section{Đánh giá mô hình}
+\subsection{Đánh giá mô hình tiếng Anh}
+\begin{frame}
+\end{frame}
+\subsection{Đánh giá mô hình tiếng Việt}
+\begin{frame}
+\end{frame}
+\section{Kết luận}
 
 \section{Tài liệu tham khảo}
 \begin{frame}{Tài liệu tham khảo}

@@ -222,7 +222,13 @@
 		\label{fig:writing-thesis}
 	\end{figure}
 	
-	Các bộ lọc CNNs thường có những hình dạng đa băng tần không hợp lý, để hiểu nó thì với mạng Neural là điều dễ dàng, nhưng với con người thì nó không có nhiều ý nghĩa trong việc thể hiện giọng nói.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{images/Vanishing-Gradients-in-DNN.png}
+		\caption{Vấn đề Vanishing Gradient trong Deep Neural Networks}
+		\label{fig:writing-thesis}
+	\end{figure}
+	Ngoài ra, các bộ lọc CNNs thường có những hình dạng đa băng tần không hợp lý, để hiểu nó thì với mạng Neural là điều dễ dàng, nhưng với con người thì nó không có nhiều ý nghĩa trong việc thể hiện giọng nói.
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{images/interpretability_problems.png}
@@ -536,11 +542,18 @@
 		\caption{Bảng kết quả SicNet trong tác vụ xác minh giọng nói - SV}
 		\label{fig:writing-thesis}
 	\end{figure}
-
+	
 	Tất cả các mô hình DNN đều cho thấy hiệu suất đầy hứa hẹn, \textbf{các chỉ EER thấp hơn 1\% trong mọi trường hợp}. Bảng cũng cho thấy rằng \textbf{SincNet lại một lần nữa hoạt động tốt hơn các mô hình khác}, cho thấy sự cải thiện hiệu suất tương đối khoảng \textbf{11\% so với mô hình CNN}. Các mô hình lớp DNN hoạt động tốt hơn đáng kể so với các \textbf{d-vector}. Bất chấp hiệu quả của cách tiếp cận sau này, một mô hình DNN mới phải được huấn luyện (hoặc tinh chỉnh) cho mỗi người nói mới được thêm vào nhóm. Điều này làm cho cách tiếp cận này hoạt động tốt hơn, nhưng kém linh hoạt hơn so với \textbf{d-vector}.
 	
 	Để hoàn thiện hơn, nhóm tác giả cũng tiến hành các thí nghiệm khác với các \textbf{i-vector} tiêu chuẩn. Tuy nhiên so sánh chi tiết với kỹ thuật này nằm ngoài phạm vi của bài báo nên nhóm tác giả chỉ nêu ra những điểm đáng chú ý nhất trong kết quả. Hệ thống \textbf{i-vector} tốt nhất của nhóm tác giả đạt được \textbf{EER = 1,1\%}, \textbf{khá xa so với những gì đạt được với hệ thống DNN}. Tài liệu nổi tiếng rằng \textbf{i-vector} cung cấp hiệu suất cạnh tranh khi sử dụng nhiều dữ liệu huấn luyện hơn cho mỗi người nói và khi các câu kiểm tra dài hơn được sử dụng. Trong các điều kiện thách thức phải đối mặt trong công việc này, mạng neural đạt được khả năng tổng quát hóa tốt hơn.
 
+	\subsubsection{3.5.3 Nhận dạng giọng nói trên tập DIRHA với SincNet}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.65\textwidth]{images/sr_sincnet_result.png}
+		\caption{Bảng kết quả SicNet trong tác vụ xác minh giọng nói - SV}
+		\label{fig:writing-thesis}
+	\end{figure}
 	\section{4. Thực nghiệm của nhóm}
 	\subsection{4.1 Phương pháp giải quyết vấn đề}
 	Cài đặt mô hình Nhận dạng Người nói và đánh giá nó với tiếng Việt và tiếng Anh với SincNet.
