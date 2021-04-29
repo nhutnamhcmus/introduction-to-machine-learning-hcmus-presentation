@@ -21,7 +21,19 @@ Những kỹ thuật này cần phải tuân theo một số tiêu chuẩn nhấ
 
 ### Những việc làm ở giữa kỳ
 
+Các đóng góp Giữa kỳ:
+- Tìm hiểu về lĩnh vực Nhận dạng giọng nói
+- Tìm hiểu phương pháp, kiến trúc mạng nổi bật gần đây nhất: SincNet Architecture từ bài báo Speaker Recognition from raw waveform with SincNet, Mirco Ravanelli, Yoshua Bengio
+- Trình bày kiến trúc mạng, chứng minh công thức theo hướng dẫn từ bài báo
+- Quay video thuyết trình những gì tìm hiểu được. 
+
 ### Những việc làm ở cuối kỳ
+
+(Dự kiến)
+- Chuẩn bị dữ liệu (cho tiếng Anh và tiếng Việt).
+- Xây dựng mô hình.
+- Trực quan hóa, đánh giá mô hình.
+- Nhận xét những kết quả làm được.
 
 ### Lời bình luận cuối
 
