@@ -1,12 +1,13 @@
+%!TeX encoding = UTF-8
 \documentclass{article}
 \usepackage[pdftex]{graphicx} %for embedding images
 \usepackage{url} %for proper url entries
 \usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Introduction to Machine Learning Midterm}, pdfauthor={Nhut-Nam Le}, pdfsubject={troduction to Machine Learning}, pdfkeywords={report, exercises}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
-\usepackage[utf8]{vietnam}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
 \usepackage{float}
 \usepackage{fancyhdr}
-\usepackage[utf8]{inputenc}
 \usepackage{pythonhighlight}
 \usepackage[left=3cm, right=3cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{parskip}
@@ -14,7 +15,8 @@
 \usepackage{hyperref}
 \usepackage[]{algorithm2e}
 \usepackage[noend]{algpseudocode}
-
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{listings}
 \usepackage{color}
 
@@ -161,9 +163,9 @@
 		\item Trình bày những gì tìm hiểu, làm được thông qua Video Clip.
 	\end{itemize}
 
-	\section{3. Trình bày lại nội dung bài báo}
+	\section{5. Trình bày lại nội dung bài báo}
 	
-	\subsection{3.1 Giới thiệu về bài báo}
+	\subsection{5.1 Giới thiệu về bài báo}
 	
 	\qquad Nhóm tác giả trong bài báo này đề xuất một kiến trúc mạng CNN (Convolutional Neural Networks) mới, được gọi là SincNet, khai phá lớp tích chập đầu tiên để khám phá nhiều thông tin hơn. SincNet dựa trên các hàm $sinc$ được tham số hóa, để cài đặt các bộ lọc băng thông.
 	
@@ -175,7 +177,7 @@
 	
 	Bài báo được đăng công khai trên \href{arxiv.org}{arXiv dot org} lần đầu tiên vào năm 2018 bởi hai người Mirco Ravanelli, Yoshua Bengio (ông được xem là một trong 3 vị cha đẻ của phương pháp Deep Learning hiện đại), phiên bản cập nhật gần đây nhất là vào năm 2019 bằng việc thay thế hàm "sinc\_conv" bằng "SincConv\_fast" giúp tăng tốc độ lên 50\% so với phiên bản cũ.
 	
-	\subsubsection{3.1.1 Về nhận dạng giọng nói}
+	\subsubsection{5.1.1 Về nhận dạng giọng nói}
 	\qquad Về lĩnh vực Nhận dạng giọng nói, đây là một lĩnh vực nghiên cứu có nhiều ứng dụng vào thực tiễn đời sống như xác thực sinh trắc học, pháp y, bảo mật, nhận dạng giọng nói và phân cực giọng nói.
 	
 	Hầu hết những giải pháp "state of the art" đều dựa trên việc biểu diễn \textbf{i-vectors} của những đoạn giọng nói, cải thiện đáng kể so với mô hình \textbf{Gaussian Mixture Model-Universal Background Models} (GMM-UBMs).
@@ -184,7 +186,7 @@
 	
 	Những kỹ thuật này cần phải tuân theo một số tiêu chuẩn nhất định, ví dụ như: độ mượt của tần số giọng nói có thể làm cản trở việc rút trích một số đặc trưng của giọng nói như cao độ và ngữ âm, .... Để khắc phục chúng, các công trình mới đây thường dùng kỹ thuật \textbf{spectrogram bins} (bin tần số) hoặc dùng cả sóng thô (raw waveform).
 	
-	\subsubsection{3.1.2 Về Convolutional Neural Networks}
+	\subsubsection{5.1.2 Về Convolutional Neural Networks}
 	\qquad Convolutional Neural Networks - CNNs là một lựa chọn thích hợp với đầu vào là những sóng thô, nó kiến trúc phổ biến nhất để xử lý các mẫu giọng nói thô nhờ vào chia sẻ trọng số, bộ lọc cục bộ và tổng hợp giúp khám phá các biểu diễn dữ liệu và bất biến.
 	
 	Vấn đề lớn nhất đối với sóng thô dựa trên mạng CNNs chính là \textbf{lớp tích chập đầu tiên}.
@@ -227,7 +229,7 @@
 	\end{figure}
 	
 	
-	\subsection{3.2 Kiến trúc mạng SincNet}
+	\subsection{5.2 Kiến trúc mạng SincNet}
 	
 	Với một CNN chuẩn, việc tích chập trong miền thời gian giữa input waveform và một số đáp ứng xung hữu hạn (Finite Impulse Response - FIR) được cho bởi công thức:
 	
@@ -377,7 +379,7 @@
 		\label{fig:writing-thesis}
 	\end{figure}
 	
-	\subsection{3.3 Các công trình liên quan đến bài báo}
+	\subsection{5.3 Các công trình liên quan đến bài báo}
 	Liệt kê danh sách các công trình liên quan đến bài báo\newline
 	\textbf{Một số công trình trước đây khai thác đặc trưng cường độ phổ:}
 	\begin{itemize}
@@ -460,16 +462,16 @@
 		\end{itemize}
 	\end{itemize}
 	
-	\subsection{3.4 Xây dựng mô hình}
+	\subsection{5.4 Xây dựng mô hình}
 	
-	\subsubsection{3.4.1 Kho dữ liệu}
+	\subsubsection{5.4.1 Kho dữ liệu}
 	\qquad Trong bài báo này, nhóm tác giả sử dụng hai tập ngữ liệu khá lớn đó là \textbf{TIMIT} (TIMIT Acoustic-Phonetic Continuous Speech Corpus) và \textbf{LibriSpeech}
 	
 	Với \textbf{TIMIT}, ta có một kho ngữ liệu với 462 người nói, các khoảng không phải lời nói ở đầu và cuối mỗi câu đã bị xóa, những tập tin về nội dung câu nói của TIMIT cũng được loại bỏ. Sau khi tinh chỉnh toàn bộ dữ liệu, tác giả dùng 5 câu nói của mỗi người nói để huấn luyện, 3 câu nói của mỗi người nói dùng để kiểm tra.
 	
 	Với tập ngữ liệu \textbf{LibriSpeech}, những phần với độ im lặng bên trong kéo dài hơn 125 ms được chia thành nhiều phần nhỏ. Việc chia tập huấn luyện (training set), tập kiểm tra (testing set) là ngẫu nhiên bằng cách chọn 12-15 giây dữ liệu huấn luyện của mỗi người nói và các câu kiểm tra kéo dài từ 2-6 giây. 
 	
-	\subsubsection{3.4.2 Xây dựng mô hình SincNet}
+	\subsubsection{5.4.2 Xây dựng mô hình SincNet}
 	\qquad Các sóng của mỗi câu nói được cắt thành những chunks khoảng 200ms (trong đó có 10 ms overlap) để có thể đưa vào mạng SincNet.
 	
 	Lớp input thực hiện hàm sinc dựa trên tích chập (convolutional) như đã nói ở phần mô tả kiến trúc mạng SincNet. Với thông số, 80 filters, mỗi filter có kích thước $L = 251$, dùng LayerNorm cho cả input và output,không dùng BatchNorm, activation LeakyReLU, không DropOut.
@@ -484,7 +486,7 @@
 	
 	Với hệ thống xác minh người nói, kế thừa từ \textbf{speaker-id neural networks} với hai cách tiếp cận cài đặt. Thứ nhất, chúng ta xem xét \textbf{d-vector framework}, dựa vào đầu ra của lớp ẩn cuối cùng và tính toán khoảng cách cosin giữa các \textbf{d-vectors} thử nghiệm và mẫu cần kiểm thử. Cách thay thế thứ hai (được biểu thị ở phần sau là \textbf{DNN-class}), hệ thống xác minh người nói có thể trực tiếp lấy điểm sau \textbf{softmax} tương ứng với danh tính được xác minh.
 	
-	\subsubsection{3.4.3 So sánh SincNet với các kiến trúc khác}
+	\subsubsection{5.4.3 So sánh SincNet với các kiến trúc khác}
 	Để so sánh SincNet với các hệ thống khác, trong bài báo nhóm tác giả đã đề xuất sự so sánh, cụ thể như sau:
 	\begin{itemize}
 		\item Thứ nhất, xem xét một kiến trúc CNN đầu vào là sóng thô (raw waveform), nhìn chung kiến trúc này không khác gì SincNet, nhưng thay vì dùng các hàm sinc trên tích chập, nó sẽ dùng một filter bình thường.
@@ -492,9 +494,9 @@
 		\item Với tác vụ thử nghiệm xác minh người nói, nhóm tác giả cũng đề xuất một đối sánh với \textbf{i-vectors}. Hệ thống \textbf{i-vectors} được cài đặt với \textbf{SIDEKIT toolkit}. Các mô hình GMM-UBM, Total Variability matrix, Probabilistic Linear Discriminant Analysis (PLDA) cũng đã được huấn luyện trên tập LibriSpeech. GMM-UBM được tạo thành từ 2048 Gaussians, hạng của ma trận TV và ma trận giọng nói riêng (eigenvoice cũng tương tự như eigenvector) là 400. Giai đoạn đăng ký và kiểm tra được tiến hành trên Librispeech bằng cách sử dụng cùng một bộ phân đoạn giọng nói được sử dụng cho các thử nghiệm DNNs.
 	\end{itemize}
 	
-	\subsection{3.5 Các kết quả}
+	\subsection{5.5 Các kết quả}
 	
-	\subsubsection{3.5.1 Phân tích các bộ lọc}
+	\subsubsection{5.5.1 Phân tích các bộ lọc}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{images/cnn_filters_sincnet_filters.png}
@@ -513,7 +515,7 @@
 	
 	Hình 3 cho thấy đáp ứng tần số tích lũy của các bộ lọc được học bởi SincNet và CNN. Điều thú vị là có \textbf{ba đỉnh chính nổi bật} rõ ràng với biểu đồ SincNet (xem đường màu đỏ trong hình). \textbf{Âm đầu tiên tương ứng với vùng cao độ} (cao độ trung bình là 133 Hz đối với nam và 234 đối với nữ). \textbf{Đỉnh thứ hai (nằm gần đúng ở tần số 500 Hz)} chủ yếu thu nhận các định dạng đầu tiên, có giá trị trung bình so với các nguyên âm tiếng Anh khác nhau thực sự là 500 Hz. Cuối cùng, \textbf{đỉnh thứ ba (dao động từ 900 đến 1400 Hz)} nắm bắt một số định dạng thứ hai quan trọng, chẳng hạn như định dạng thứ hai của nguyên âm /a/ có vị trí trung bình ở tần số 1100 Hz. Cấu hình tập các bộ lọc này chỉ ra rằng SincNet đã điều chỉnh thành công các đặc điểm của nó để giải quyết vấn đề nhận dạng người nói. Ngược lại, với \textbf{CNN không thể hiện một mô hình có ý nghĩa như vậy}: các bộ lọc CNN có xu hướng tập trung chính xác vào phần dưới của phổ tần số, nhưng các đỉnh được điều chỉnh trên các công thức thứ nhất và thứ hai không xuất hiện rõ ràng. Như mọi người có thể quan sát từ Hình 3, đường cong CNN đứng trên đường SincNet. Trên thực tế, SincNet học từ các bộ lọc trung bình chọn lọc hơn các bộ lọc của CNN, có thể nắm bắt đặc trưng có dải tần hẹp tốt hơn.
 
-	\subsubsection{3.5.2 Tác vụ nhận dạng giọng nói - Speaker Identification}
+	\subsubsection{5.5.2 Tác vụ định danh người nói - Speaker Identification}
 	\qquad Như đã dẫn chứng ở trên, ở hình 4 trong bài báo, cho thấy learning curves của SincNet so với CNN. Ta có thể thấy rằng, Frame Error Rate giảm thực sự nhanh khi dùng SincNet. Hơn nữa, SincNet hội tụ với hiệu suất tốt hơn với FER $33.0\%$ so với FER $37.7\%$ của CNN
 	
 	\begin{figure}[H]
@@ -524,7 +526,7 @@
 	\end{figure}
 	Bảng trên đây là một bảng báo cáo về tỉ lệ phân lớp lỗi (\textbf{Classification Error Rates - CER\%}), khi thực nghiệm SincNet cùng với số kỹ thuật khác như \textbf{DNN-MFCC, CNN-FBANK, CNN-Raw} trên hai tập dữ liệu \textbf{TIMIT} và \textbf{LibriSpeech}. Nhìn chung, SincNet luôn dẫn đầu về độ lỗi tốt (có độ lỗi thấp nhất). Độ lỗi của \textbf{CNN-Raw} thật sự lớn khi tiến hành với tập TIMIT, điều này cho thấy S\textbf{SincNet} của chúng ta hoạt động tốt ngay cả khi có không lớn dữ liệu huấn luyện có sẵn. Khi huấn luyện với \textbf{LibriSpeech}, độ lỗi \textbf{CNN-Raw} giảm xuống, chúng ta có 4\% độ lỗi được giảm xuống, điều này cho thấy tốc độ hội tụ của SincNet cải thiện rõ ràng (1200 và 1800 epochs). Với \textbf{DNN-MFCC, CNN-FBANK}, hai kỹ thuật này hoạt động tốt trên \textbf{TIMIT} (vì đơn giản là \textbf{TIMIT} không lớn cho lắm như \textbf{LibriSpeech}), khi sang \textbf{LibriSpeech}, chúng có vẻ mất đi tính ổn định, độ lỗi cao lên.
 	
-	\subsubsection{3.5.3 Tác vụ xác minh giọng nói - Speaker Verification}
+	\subsubsection{5.5.3 Tác vụ xác minh người nói - Speaker Verification}
 	Thử nghiệm cuối cùng mà nhóm tác giả trình bày ở trong bài báo là tác vụ \textbf{xác minh giọng nói - Speaker Verification}. Bảng dưới đây, được trích ra trong bài báo, báo cáo về chỉ số \textbf{Equal Error Rate} (EER\%) khi thực nghiệm trên tập \textbf{LibriSpeech}. 
 	\begin{figure}[H]
 		\centering
@@ -537,15 +539,15 @@
 	
 	Để hoàn thiện hơn, nhóm tác giả cũng tiến hành các thí nghiệm khác với các \textbf{i-vector} tiêu chuẩn. Tuy nhiên so sánh chi tiết với kỹ thuật này nằm ngoài phạm vi của bài báo nên nhóm tác giả chỉ nêu ra những điểm đáng chú ý nhất trong kết quả. Hệ thống \textbf{i-vector} tốt nhất của nhóm tác giả đạt được \textbf{EER = 1,1\%}, \textbf{khá xa so với những gì đạt được với hệ thống DNN}. Tài liệu nổi tiếng rằng \textbf{i-vector} cung cấp hiệu suất cạnh tranh khi sử dụng nhiều dữ liệu huấn luyện hơn cho mỗi người nói và khi các câu kiểm tra dài hơn được sử dụng. Trong các điều kiện thách thức phải đối mặt trong công việc này, mạng neural đạt được khả năng tổng quát hóa tốt hơn.
 
-	\subsubsection{3.5.3 Nhận dạng giọng nói trên tập DIRHA với SincNet}
+	\subsubsection{5.5.3 Nhận dạng giọng nói trên tập DIRHA với SincNet}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.65\textwidth]{images/sr_sincnet_result.png}
 		\caption{Bảng kết quả SicNet trong tác vụ xác minh giọng nói - SV}
 		\label{fig:writing-thesis}
 	\end{figure}
-	\section{4. Thực nghiệm của nhóm}
-	\subsection{4.1 Phương pháp giải quyết vấn đề}
+	\section{6. Thực nghiệm của nhóm}
+	\subsection{6.1 Phương pháp giải quyết vấn đề}
 	Cài đặt mô hình Nhận dạng Người nói và đánh giá nó với tiếng Việt và tiếng Anh với SincNet.
 	Các tác vụ thành phần của mô hình: Identification (Định danh) và Verification (Xác minh)
 	
@@ -572,36 +574,36 @@
 	\end{itemize}
 	
 	Ngoài ra, nhóm tự ghi âm thêm dữ liệu với độ dài tương tự như tập này.
-	\subsection{4.3 Thử nghiệm thực nghiệm với tiếng Việt}
-	\subsubsection{4.3.1 Thu thập - Tiền xử lý dữ liệu, gán nhãn}
+	\subsection{6.3 Thử nghiệm thực nghiệm với tiếng Việt}
+	\subsubsection{6.3.1 Thu thập - Tiền xử lý dữ liệu, gán nhãn}
 	
-	\subsubsection{4.3.2 Phân chia tập dữ liệu}
+	\subsubsection{6.3.2 Phân chia tập dữ liệu}
 	
-	\subsubsection{4.3.3 Điều chỉnh thông số và huấn luyện}
+	\subsubsection{6.3.3 Điều chỉnh thông số và huấn luyện}
 	
-	\subsubsection{4.3.4 Đánh giá}
+	\subsubsection{6.3.4 Đánh giá}
 	
-	\subsection{4.3 Thử nghiệm thực nghiệm với tiếng Anh với tập TIMIT}
-	\subsubsection{4.3.1 Tải và điều chỉnh dữ liệu}
+	\subsection{6.3 Thử nghiệm thực nghiệm với tiếng Anh với tập TIMIT}
+	\subsubsection{6.3.1 Tải và điều chỉnh dữ liệu}
 	
-	\subsubsection{4.3.2 Huấn luyện mô hình}
+	\subsubsection{6.3.2 Huấn luyện mô hình}
 	
-	\subsubsection{4.3.3 Đánh giá mô hình}
+	\subsubsection{6.3.3 Đánh giá mô hình}
 	
-	\subsubsection{4.3.4 So sánh với kết quả có trong bài báo}
+	\subsubsection{6.3.4 So sánh với kết quả có trong bài báo}
 	
-	\subsection{4.3 Thử nghiệm thực nghiệm với tiếng Anh với tập LibrisSpeech}
-	\subsubsection{4.3.1 Tải và điều chỉnh dữ liệu}
+	\subsection{6.3 Thử nghiệm thực nghiệm với tiếng Anh với tập LibrisSpeech}
+	\subsubsection{6.3.1 Tải và điều chỉnh dữ liệu}
 	
-	\subsubsection{4.3.2 Huấn luyện mô hình}
+	\subsubsection{6.3.2 Huấn luyện mô hình}
 	
-	\subsubsection{4.3.3 Đánh giá mô hình}
+	\subsubsection{6.3.3 Đánh giá mô hình}
 	
-	\subsubsection{4.3.4 So sánh với kết quả có trong bài báo}
+	\subsubsection{6.3.4 So sánh với kết quả có trong bài báo}
 	
-	\section{5. Kế hoạch thực hiện}
+	\section{7. Kế hoạch thực hiện}
 	
-	\subsection{5.1 Timeline}
+	\subsection{7.1 Timeline}
 	\scalebox{1}{
 		\begin{tabular}{r |@{\foo} l}
 			
@@ -619,7 +621,7 @@
 		\end{tabular}
 	}
 
-	\subsection{5.2 Vai trò của các thành viên}
+	\subsection{7.2 Vai trò của các thành viên}
 	
 	\begin{center}
 		\begin{tabular}{ | c | c | c | c | c |}\hline
@@ -631,7 +633,7 @@
 		\end{tabular}
 	\end{center}
 
-	\subsection{5.3 Phân công công việc}
+	\subsection{7.3 Phân công công việc}
 	\begin{center}
 		\begin{tabular}{ | l | l | l | p{5.5cm} | p{3cm} |}
 			\hline
