@@ -101,7 +101,7 @@
 	\qquad Đặc biệt, chúng em xin bày tỏ lòng biết ơn sâu sắc đến các thầy cô khoa Công nghệ Thông tin, cụ thể hơn là thầy Bùi Tiến Lên và các thầy hướng dẫn đã giảng dạy rất nhiệt, cung cấp nhiều slides, tài nguyên học tập cần thiết, tạo điều kiện tốt nhất để chúng em có thể hoàn thành được đồ án này.
 	
 	\qquad Trong quá trình, viết báo cáo này, chúng em không thể tránh khỏi nhiều thiếu sót, hy vọng mong nhận được góp ý từ thầy để chúng em tiếp tục hoàn thiện hơn đối với đồ án này, cũng như rút kinh nghiệm cho những đồ án, những báo cáo kế tiếp.
-	
+		
 	\vspace{1.0in}
 	\textbf{Đại học Khoa học Tự nhiên, ĐHQG-HCM.}\\
 	Vương Gia Bảo, Ngô Xuân Kiên, Lê Nhựt Nam, Nguyễn Viết Dũng\\
@@ -114,9 +114,40 @@
 	\pagenumbering{arabic} %reset numbering to normal for the main content
 	\setcounter{secnumdepth}{0}
 	
+	\section{1. Đặt vấn đề}
+	\qquad Trong những năm gần đây, Machine Learning (Học máy/ Máy học) đạt được rất nhiều thành tựu nổi bật, thúc đẩy Cách mạng Công nghệ 4.0 phát triển nhanh chóng. Một trong những tác nhân chính mạnh mẽ nhất đến từ Deep Learning (Deep Neural Networks - Các mạng Học sâu), các mô hình học dựa trên những phương pháp này đã rất thành công, đạt được một hiệu năng đầy triển vọng, trong nhiều tác vụ khác nhau như Thị giác Máy tính (Computer Vision), Nhận dạng Nhân trắc học (Biometrics): Giọng nói (Speech), Khuôn mặt (Face), Vân tay (Fingerprint), ..., Xử lý ngôn ngữ tự nhiên (Natural Language Processing), ...
+	
+	Trong tác vụ nhận dạng, đặc biệt là nhận dạng giọng nói (Voice/ Speech Recognition) gần như là một bài toán khó trong nhiều năm, cần những phương pháp rất phức tạp để có thể giải quyết được. Nhờ vào Học sâu, phương giải phải khả thi, mà cụ thể là với Mạng Neural Tích chập (Convolutional Neural Networks - CNNs) đem lại những kết quả đầy hứa hẹn khi chỉ cần đầu vào trực tiếp là mẫu giọng nói thô. Thay vì sử dụng các tính năng thủ công tiêu chuẩn, CNNs sau này học cách biểu diễn giọng nói cấp thấp từ các dạng sóng, có khả năng cho phép mạng nắm bắt tốt hơn các đặc điểm giọng nói ở dải tần hẹp quan trọng như cao độ và hình dạng.
+	
+	Với mục đích tìm hiểu bài báo khoa học, cũng như tìm hiểu những mô hình, phương pháp Học máy nổi bật gần đây trong những tác vụ quan trọng, mà cụ thể là nhận dạng. Nhóm chúng em quyết định chọn một bài báo khoa học liên quan đến Nhận dạng giọng nói và cũng là tài liệu nghiên cứu chính thực hiện chính cho đồ án môn học.
+	
 	\section{1. Giới thiệu}
+	\qquad Phần tiếp nối công việc giữa kỳ, trong phần này nhóm trình bày cách xây dựng một Speaker Recognition Pipeline cơ bản: Chuẩn bị dữ liệu (Data preparation), Xây dựng phát triển mô hình (Development), Đăng ký (Enrollment), Đánh giá (Evaluation)
 	
 	\section{2. Chuẩn bị dữ liệu}
+	\subsection{Dữ liệu giọng nói tiếng Anh}
+	\qquad \textbf{Tiếng Anh} Sử dụng hai tập dữ liệu đã được đề cập trong bài báo
+	
+	Với \textbf{TIMIT}, ta có một kho ngữ liệu với 462 người nói, các khoảng không phải lời nói ở đầu và cuối mỗi câu đã bị xóa, những tập tin về nội dung câu nói của TIMIT cũng được loại bỏ. Sau khi tinh chỉnh toàn bộ dữ liệu, tác giả dùng 5 câu nói của mỗi người nói để huấn luyện, 3 câu nói của mỗi người nói dùng để kiểm tra.
+	
+	Với tập ngữ liệu \textbf{LibriSpeech}, những phần với độ im lặng bên trong kéo dài hơn 125 ms được chia thành nhiều phần nhỏ. Việc chia tập huấn luyện (training set), tập kiểm tra (testing set) là ngẫu nhiên bằng cách chọn 12-15 giây dữ liệu huấn luyện của mỗi người nói và các câu kiểm tra kéo dài từ 2-6 giây. 
+	\subsection{Dữ liệu giọng nói tiếng Việt}
+	Sử dụng tập dữ liệu Son et al. Dataset
+	
+	Nguồn dữ liệu từ bài báo Vietnamese Speaker Authentication Using Deep Models
+	\begin{itemize}
+		\item Dung lượng của tập dữ liệu: 535 MB
+		\item Số mẫu trong tập dữ liệu: 400 mẫu
+		\item Bộ dữ liệu gồm: hai tập  Men và Women, mỗi tập con chứa 10 thư mục người nói. Mỗi thư mục người nói chứa 20 đoạn ghi âm, chia ra Long và Short (mỗi loại 10 đoạn) 
+		\item Nội dung câu nói
+		\begin{itemize}
+			\item Câu ngắn: “Tôi là sinh viên chuyên ngành công nghệ thông tin"
+			\item Câu dài: "Tôi là sinh viên Học viện Công nghệ Bưu chính Viễn thông, chương trình đào tạo khá nặng đòi hỏi sinh viên phải học tập và nghiên cứu rất nhiều nhưng tôi tự hào vì đó là ngành đã và đang làm thay đổi cuộc sống xã hội loài người".
+		\end{itemize}
+		\item Điểm hạn chế: Bộ dữ liệu có kích thước khá nhỏ
+	\end{itemize}
+	
+	Ngoài ra, nhóm tự ghi âm thêm dữ liệu với độ dài tương tự như tập này.
 	
 	\section{3. Xây dựng mô hình}
 	
