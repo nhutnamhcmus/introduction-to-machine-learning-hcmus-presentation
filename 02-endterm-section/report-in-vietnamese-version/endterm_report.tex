@@ -14,7 +14,8 @@
 \usepackage{hyperref}
 \usepackage[]{algorithm2e}
 \usepackage[noend]{algpseudocode}
-
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{listings}
 \usepackage{color}
 
@@ -49,8 +50,8 @@
 \setlength{\parindent}{15pt}
 \setlength{\headheight}{15.2pt}
 \pagestyle{fancy}
-\lhead[<even output>]{Nhập môn Học Máy}
-\rhead[<even output>]{Báo cáo Giữa kỳ}
+\lhead[<even output>]{NHẬP MÔN HỌC MÁY}
+\rhead[<even output>]{BÁO CÁO CUỐI KỲ}
 \title{research-outline}
 \author{Nhut-Nam Le}
 \date{2021}
@@ -149,12 +150,141 @@
 	
 	Ngoài ra, nhóm tự ghi âm thêm dữ liệu với độ dài tương tự như tập này.
 	
-	\section{3. Xây dựng mô hình}
-	
+	\section{3. Xây dựng thực nghiệm}
+	\subsection{Thực nghiệm trên tập TIMIT}
+	\begin{itemize}
+		\item Xử lý dữ liệu
+		\item Mô hình 
+		\begin{itemize}
+			\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
+			\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Ba lớp DNN: sử dụng 3 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU
+			\item Lớp Output: Multi Layer Perceptron, 462 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax
+			\item Hàm mất mát: Negative Log Likelihood Loss
+		\end{itemize}
+		\item Hyper parameters
+		\begin{itemize}
+			\item learning rate $\text{lr} = 0.001$
+			\item $\alpha = 0.95$
+			\item $\epsilon = 10^{-7}$
+			\item $\text{batch\_size}=128$
+			\item $\text{N\_epochs}=100$
+			\item $\text{N\_batches}=800$
+			\item $\text{N\_eval\_epoch}=8$
+			\item $\text{seed}=1234$
+		\end{itemize}
+	\end{itemize}
+	\subsection{Thực nghiệm trên tập Librispeech}
+	\begin{itemize}
+		\item Xử lý dữ liệu
+		\item Mô hình 
+		\begin{itemize}
+			\item Các cửa sổ có $\text{fs} = 8000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=375$, overlap $\text{cw\_shift}=10$s
+			\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Hai lớp DNN: sử dụng 2 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU làm activation cho lớp DNN thứ nhất, lớp kia dùng linear
+			\item Lớp Output: 2 lớp Multi Layer Perceptron, 2048 nodes cho mỗi lớp, không dropout, Layer Norm cho input, Batch Norm cho output, hàm activation function lớp thứ nhất dùng leaky-ReLU, lớp thứ hai dùng softmax
+			\item Hàm mất mát: Negative Log Likelihood Loss
+		\end{itemize}
+		\item Hyper parameters
+		\begin{itemize}
+			\item learning rate $\text{lr} = 0.001$
+			\item $\alpha = 0.95$
+			\item $\epsilon = 10^{-7}$
+			\item $\text{batch\_size}=128$
+			\item $\text{N\_epochs}=100$
+			\item $\text{N\_batches}=100$
+			\item $\text{N\_eval\_epoch}=10$
+			\item $\text{reg\_factor}=1000$
+			\item $\text{fact\_amp=0.2}$
+			\item $\text{seed}=1234$
+		\end{itemize}
+	\end{itemize}
+	\subsection{Thực nghiệm trên tập Son et al. Dataset}
+	\begin{itemize}
+		\item Xử lý dữ liệu
+		\item Mô hình 
+		\begin{itemize}
+			\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
+			\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+			\item Ba lớp DNN: sử dụng 3 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU
+			\item Lớp Output: Multi Layer Perceptron, 18 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax
+			\item Hàm mất mát: Negative Log Likelihood Loss
+		\end{itemize}
+		\item Hyper parameters
+		\begin{itemize}
+			\item learning rate $\text{lr} = 0.001$
+			\item $\alpha = 0.95$
+			\item $\epsilon = 10^{-7}$
+			\item $\text{batch\_size}=128$
+			\item $\text{N\_epochs}=300$
+			\item $\text{N\_batches}=100$
+			\item $\text{N\_eval\_epoch}=1$
+			\item $\text{seed}=1234$
+		\end{itemize}
+	\end{itemize}
 	\section{4. Đăng ký}
 	
 	\section{5. Đánh giá mô hình}
-	
+	\subsection{Kết quả thực nghiệm trên tập TIMIT}
+	Các kết quả khi đánh giá mô hình bằng tập TIMIT
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/evaluate_result_timit.png}
+		\caption{Kết quả thực nghiệm trên TIMIT Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=4.217127$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.513561$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.018038$
+	\end{itemize}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/sincnet_timit_plot.png}
+		\caption{Kết quả thực nghiệm trên TIMIT Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\subsection{Kết quả thực nghiệm trên tập Librispeech}
+	Các kết quả khi đánh giá mô hình bằng tập Librispeech
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/evaluate_result_libris.png}
+		\caption{Kết quả thực nghiệm trên Librispeech Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=5.448840$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.907977$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.456924$
+	\end{itemize}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/sincnet_librispeech_plot.png}
+		\caption{Kết quả thực nghiệm trên Librispeech Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\subsection{Kết quả thực nghiệm trên tập Son et al. Dataset}
+	Các kết quả khi đánh giá mô hình bằng tập Son et al. Dataset
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/evaluate_result_vn_speaker.png}
+		\caption{Kết quả thực nghiệm trên Son et al. Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=0.113859$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.031011$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.000000$
+	\end{itemize}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/sincnet_vietnamese_plot.png}
+		\caption{Kết quả thực nghiệm trên Son et al. Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
 	\section{6. Kết luận}
 	
 	\section{7. Kế hoạch thực hiện}
@@ -178,19 +308,19 @@
 	}
 	
 	\subsection{7.2 Vai trò của các thành viên}
-	
-	\begin{center}
-		\begin{tabular}{ | c | c | c | c | c |}\hline
-			STT	& MSSV & Họ tên đầy đủ & Email liên lạc & Vai trò\T\B\\\hline
-			1 & 18120009 & Vương Gia Bảo & 18120009@student.hcmus.edu.vn  & Thành viên \T\B\\ \hline
-			2 & 18120045 & Ngô Xuân Kiên & 18120045@student.hcmus.edu.vn & Thành viên\T\B\\ \hline
-			3 & 18120061 & Lê Nhựt Nam & 18120061@student.hcmus.edu.vn & Nhóm trưởng \T\B\\ \hline
-			4 & 18120167 & Nguyễn Viết Dũng &  18120167@student.hcmus.edu.vn & Thành viên \T\B\\ \hline
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{ | p{1cm} |  p{3cm} | p{5cm} | p{5cm}  |}\hline
+			STT	& MSSV & Họ tên đầy đủ & Email liên lạc \\\hline
+			1 & 18120009 & Vương Gia Bảo & 18120009@student.hcmus.edu.vn  \\ \hline
+			2 & 18120045 & Ngô Xuân Kiên & 18120045@student.hcmus.edu.vn \\ \hline
+			3 & 18120061 & Lê Nhựt Nam (Nhóm trưởng)& 18120061@student.hcmus.edu.vn  \\ \hline
+			4 & 18120167 & Nguyễn Viết Dũng &  18120167@student.hcmus.edu.vn \\ \hline
 		\end{tabular}
-	\end{center}
+	\end{table}
 	
 	\subsection{7.3 Phân công công việc}
-	\begin{center}
+	\begin{table}[H]
 		\begin{tabular}{ | l | l | l | p{5.5cm} | p{3cm} |}
 			\hline
 			STT & MSSV & Họ tên & Nội dung công việc & Mức độ hoàn thành  \\ \hline
@@ -199,7 +329,7 @@
 			3 & 18120061 & Lê Nhựt Nam & Thu thập dữ liệu, đọc hiểu source, báo cáo, SincNet Architecture, Slides thuyết trình, Midterm Report & 100\%\T\B \\ \hline
 			4 & 18120167 & Nguyễn Viết Dũng &  Thu thập dữ liệu, đọc hiểu source, báo cáo experimental setup Paper & 100\%\T\B \\ \hline
 		\end{tabular}
-	\end{center}
+	\end{table}
 	\nocite{*}
 	\bibliography{references}\newpage\cleardoublepage
 	\bibliographystyle{plain}

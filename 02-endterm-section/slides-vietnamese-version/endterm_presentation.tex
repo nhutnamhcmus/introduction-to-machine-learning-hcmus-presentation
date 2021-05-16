@@ -198,7 +198,6 @@
 %
 \author{Vương Gia Bảo, Nguyễn Viết Dũng\newline Ngô Xuân Kiên, Lê Nhựt Nam}
 \title{NHẬP MÔN MÁY HỌC \newline SPEAKER RECOGNITION FROM \newline RAW WAVEFORM WITH SINCNET}
-\institute{Đại học Khoa học Tự nhiên, Đại học Quốc gia TP HCM} 
 
 
 %
@@ -222,7 +221,13 @@
 \begin{document}
 
 \begin{frame}
-\titlepage
+	\centering
+	ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH
+	
+	ĐẠI HỌC KHOA HỌC TỰ NHIÊN
+	
+	KHOA CÔNG NGHỆ THÔNG TIN - BỘ MÔN KHOA HỌC MÁY TÍNH
+	\titlepage
 \end{frame}
 
 \begin{frame}{Nội dung trình bày}
@@ -249,26 +254,159 @@
 		\item Điểm hạn chế: Bộ dữ liệu có kích thước khá nhỏ
 	\end{itemize}
 \end{frame}
-\section{Xây dựng thực nghiệm mô hình SincNet}
-\subsection{Xây dựng thực nghiệm với tiếng Anh}
-\begin{frame}
+\section{Xây dựng thực nghiệm mô hình \textbf{SincNet}}
+\begin{frame}{SincNet Architecture Digram}
+	\begin{figure}[H]
+		\includegraphics[width=0.4\linewidth]{images/SincNet.png}
+		\caption{The SincNet Architecture}
+		\label{fig:writing-thesis}
+	\end{figure}
 \end{frame}
-\subsection{Xây dựng thực nghiệm với tiếng Việt}
-\begin{frame}
+\begin{frame}{Speaker Recognition Pipeline}
+	\begin{figure}[H]
+		\includegraphics[width=0.95\linewidth]{images/speaker_recognition_pipeline.png}
+		\caption{Speaker Recognition Pipeline}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\subsection{Xây dựng thực nghiệm với \textbf{tiếng Anh}}
+\begin{frame}{Sử dụng tập dữ liệu TIMIT}
+	Các thông số mô hình khi sử dụng tập TIMIT
+	\begin{itemize}
+		\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
+		\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Ba lớp DNN: sử dụng 3 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU
+		\item Lớp Output: Multi Layer Perceptron, 462 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax 
+	\end{itemize}
+\end{frame}
+\begin{frame}{Sử dụng tập dữ liệu TIMIT}
+	Các Hyper parameters
+	\begin{itemize}
+		\item learning rate $\text{lr} = 0.001$
+		\item $\alpha = 0.95$
+		\item $\epsilon = 10^{-7}$
+		\item $\text{batch\_size}=128$
+		\item $\text{N\_epochs}=100$
+		\item $\text{N\_batches}=800$
+		\item $\text{N\_eval\_epoch}=8$
+		\item $\text{seed}=1234$
+	\end{itemize}
+\end{frame}
+\begin{frame}{Sử dụng tập dữ liệu Librispeech}
+	Các thông số mô hình khi sử dụng tập Librispeech
+	\begin{itemize}
+		\item Các cửa sổ có $\text{fs} = 8000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=375$, overlap $\text{cw\_shift}=10$s
+		\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Hai lớp DNN: sử dụng 2 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU làm activation cho lớp DNN thứ nhất, lớp kia dùng linear
+		\item Lớp Output: 2 lớp Multi Layer Perceptron, 2048 nodes cho mỗi lớp, không dropout, Layer Norm cho input, Batch Norm cho output, hàm activation function lớp thứ nhất dùng leaky-ReLU, lớp thứ hai dùng softmax
+	\end{itemize}
+\end{frame}
+\begin{frame}{Sử dụng tập dữ liệu Librispeech}
+		Các Hyper parameters
+		\begin{itemize}
+			\item \item learning rate $\text{lr} = 0.001$
+			\item $\alpha = 0.95$
+			\item $\epsilon = 10^{-7}$
+			\item $\text{batch\_size}=128$
+			\item $\text{N\_epochs}=100$
+			\item $\text{N\_batches}=100$
+			\item $\text{N\_eval\_epoch}=10$
+			\item $\text{reg\_factor}=1000$
+			\item $\text{fact\_amp=0.2}$
+			\item $\text{seed}=1234$
+		\end{itemize}
+\end{frame}
+\subsection{Xây dựng thực nghiệm với \textbf{tiếng Việt}}
+\begin{frame}{Sử dụng tập dữ liệu Son et al. Dataset}
+	Các thông số mô hình khi sử dụng tập Son et al. Dataset
+	\begin{itemize}
+		\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
+		\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
+		\item Ba lớp DNN: sử dụng 3 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU
+		\item Lớp Output: Multi Layer Perceptron, 18 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax
+	\end{itemize}
+\end{frame}
+\begin{frame}{Sử dụng tập dữ liệu Son et al. Dataset}
+	Các Hyper parameters
+	\begin{itemize}
+		\item Tốc độ học - learning rate $\text{lr} = 0.001$
+		\item $\alpha = 0.95$
+		\item $\epsilon = 10^{-7}$
+		\item Kích thước batch norm $\text{batch\_size}=128$
+		\item Số lượng epochs training $\text{N\_epochs}=300$
+		\item Số lượng batch $\text{N\_batches}=100$
+		\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=1$
+		\item $\text{seed}=1234$
+	\end{itemize}
 \end{frame}
 \section{Đăng ký - Enrollment}
-\subsection{Đăng ký mô hình tiếng Anh}
-\begin{frame}
+\subsection{Đăng ký mô hình \textbf{tiếng Anh}}
+\begin{frame}{Tính toán d-vector}
+	Thông số mô hình tính toán d-vector
 \end{frame}
-\subsection{Đăng ký mô hình tiếng Việt}
-\begin{frame}
+\begin{frame}{So sánh hai d-vector}
+	Triển khai sử dụng độ đo cosine trong so sánh d-vector và phân ngưỡng
+\end{frame}
+\begin{frame}{Dự đoán từ mô hình}
+	
+\end{frame}
+\subsection{Đăng ký mô hình \textbf{tiếng Việt}}
+\begin{frame}{Tính toán d-vector}
+		Thông số mô hình tính toán d-vector
+\end{frame}
+\begin{frame}{So sánh hai d-vector}
+	Triển khai sử dụng độ đo cosine trong so sánh d-vector và phân ngưỡng
+\end{frame}
+\begin{frame}{Dự đoán từ mô hình}
+	
 \end{frame}
 \section{Đánh giá mô hình}
-\subsection{Đánh giá mô hình tiếng Anh}
-\begin{frame}
+\subsection{Đánh giá mô hình \textbf{tiếng Anh}}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập TIMIT
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=4.217127$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.513561$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.018038$
+	\end{itemize}
 \end{frame}
-\subsection{Đánh giá mô hình tiếng Việt}
-\begin{frame}
+\begin{frame}{TIMIT Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_timit_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập Librispeech
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=5.448840$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.907977$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.456924$
+	\end{itemize}
+\end{frame}
+\begin{frame}{Librispeech Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_librispeech_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\subsection{Đánh giá mô hình \textbf{tiếng Việt}}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập Son et al. Dataset
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=0.113859$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.031011$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.000000$
+	\end{itemize}
+\end{frame}
+\begin{frame}{Son et al. Dataset Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_vietnamese_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
 \end{frame}
 \section{Kết luận}
 
