@@ -1,7 +1,8 @@
+%!TeX encoding = UTF-8 Unicode
 \documentclass{article}
 \usepackage[pdftex]{graphicx} %for embedding images
 \usepackage{url} %for proper url entries
-\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Introduction to Machine Learning Midterm}, pdfauthor={Nhut-Nam Le}, pdfsubject={troduction to Machine Learning}, pdfkeywords={report, exercises}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={Introduction to Machine Learning Endterm}, pdfauthor={Nhut-Nam Le}, pdfsubject={troduction to Machine Learning}, pdfkeywords={report, exercises}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
 \usepackage[utf8]{vietnam}
 \usepackage{float}
@@ -154,6 +155,10 @@
 	\subsection{Thực nghiệm trên tập TIMIT}
 	\begin{itemize}
 		\item Xử lý dữ liệu
+		\begin{itemize}
+			\item Việc xử lý dữ liệu không cần nhiều sự phức tạp, nhưng cần phải thiết lập lại đường dẫn về dạng lowercase "train/dr1/fcjf0/si1027.wav"
+			\item Chạy file TIMIT\_preparation.py chuẩn hóa dữ liệu
+		\end{itemize}
 		\item Mô hình 
 		\begin{itemize}
 			\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
@@ -174,10 +179,19 @@
 			\item $\text{N\_eval\_epoch}=8$
 			\item $\text{seed}=1234$
 		\end{itemize}
+		\item Đánh giá mô hình
+		\begin{itemize}
+			\item FER (Frame Error Rate)
+			\item CER (Classification Error Rate)
+			\item EER (Equal Error Rate)
+		\end{itemize}
 	\end{itemize}
 	\subsection{Thực nghiệm trên tập Librispeech}
 	\begin{itemize}
 		\item Xử lý dữ liệu
+		\begin{itemize}
+			\item Việc xử lý dữ liệu không cần nhiều sự phức tạp, nhưng cần phải thiết lập lại đường dẫn về dạng lowercase "train/dr1/fcjf0/si1027.wav"
+		\end{itemize}
 		\item Mô hình 
 		\begin{itemize}
 			\item Các cửa sổ có $\text{fs} = 8000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=375$, overlap $\text{cw\_shift}=10$s
@@ -200,10 +214,20 @@
 			\item $\text{fact\_amp=0.2}$
 			\item $\text{seed}=1234$
 		\end{itemize}
+		\item Đánh giá mô hình
+		\begin{itemize}
+			\item FER (Frame Error Rate)
+			\item CER (Classification Error Rate)
+			\item EER (Equal Error Rate)
+		\end{itemize}
 	\end{itemize}
 	\subsection{Thực nghiệm trên tập Son et al. Dataset}
 	\begin{itemize}
 		\item Xử lý dữ liệu
+		\begin{itemize}
+			\item Việc xử lý dữ liệu không cần nhiều sự phức tạp, nhưng cần phải thiết lập lại đường dẫn về dạng lowercase "train/dr1/fcjf0/si1027.wav"
+			\item Có một chút thay đổi về source code so với tác giả, nhầm chuẩn hóa dữ liệu âm thâm về dạng mono channel, sau đó chạy chương trình vietnamese\_speaker\_preparation.py để chuẩn hóa dữ liệu
+		\end{itemize}
 		\item Mô hình 
 		\begin{itemize}
 			\item Các cửa sổ có $\text{fs} = 16000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
@@ -224,10 +248,23 @@
 			\item $\text{N\_eval\_epoch}=1$
 			\item $\text{seed}=1234$
 		\end{itemize}
+		\item Đánh giá mô hình
+		\begin{itemize}
+			\item FER (Frame Error Rate)
+			\item CER (Classification Error Rate)
+			\item EER (Equal Error Rate)
+		\end{itemize}
 	\end{itemize}
 	\section{4. Đăng ký}
 	
 	\section{5. Đánh giá mô hình}
+	\subsection{Các độ đo}
+	Nhóm sử dụng môt số độ đo trong việc đánh giá mô hình như sau
+	\begin{itemize}
+		\item FER (Frame Error Rate)
+		\item CER (Classification Error Rate)
+		\item EER (Equal Error Rate)
+	\end{itemize}
 	\subsection{Kết quả thực nghiệm trên tập TIMIT}
 	Các kết quả khi đánh giá mô hình bằng tập TIMIT
 	\begin{figure}[H]
@@ -245,6 +282,18 @@
 		\centering
 		\includegraphics[width=.75\textwidth]{result/sincnet_timit_plot.png}
 		\caption{Kết quả thực nghiệm trên TIMIT Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/roc_curve_timit.png}
+		\caption{Đồ thị ROC Curve TIMIT Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/pr_curve_timit.png}
+		\caption{Đồ thị PR Curve TIMIT Dataset}
 		\label{fig:writing-thesis}
 	\end{figure}
 	\subsection{Kết quả thực nghiệm trên tập Librispeech}
@@ -266,6 +315,18 @@
 		\caption{Kết quả thực nghiệm trên Librispeech Dataset}
 		\label{fig:writing-thesis}
 	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/roc_curve_librispeech.png}
+		\caption{Đồ thị ROC Curve Librispeech Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/pr_curve_librispeech.png}
+		\caption{Đồ thị PR Curve Librispeech Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
 	\subsection{Kết quả thực nghiệm trên tập Son et al. Dataset}
 	Các kết quả khi đánh giá mô hình bằng tập Son et al. Dataset
 	\begin{figure}[H]
@@ -283,6 +344,18 @@
 		\centering
 		\includegraphics[width=.75\textwidth]{result/sincnet_vietnamese_plot.png}
 		\caption{Kết quả thực nghiệm trên Son et al. Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/roc_curve_vietnamese.png}
+		\caption{Đồ thị ROC Curve Son et al. Dataset Dataset}
+		\label{fig:writing-thesis}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{result/pr_curve_vietnamese.png}
+		\caption{Đồ thị PR Curve Son et al. Dataset Dataset}
 		\label{fig:writing-thesis}
 	\end{figure}
 	\section{6. Kết luận}

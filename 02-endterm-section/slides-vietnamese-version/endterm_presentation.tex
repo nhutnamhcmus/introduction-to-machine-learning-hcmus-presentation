@@ -2,7 +2,7 @@
 \documentclass[notheorems, aspectratio=54]{beamer}
 % aspectratio: 1610, 149, 54, 43(default), 32
 \usepackage[utf8]{inputenc}
-\usepackage[english, vietnamese]{babel}
+\usepackage[vietnamese]{babel}
 \usepackage{latexsym}
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
@@ -226,7 +226,9 @@
 	
 	ĐẠI HỌC KHOA HỌC TỰ NHIÊN
 	
-	KHOA CÔNG NGHỆ THÔNG TIN - BỘ MÔN KHOA HỌC MÁY TÍNH
+	KHOA CÔNG NGHỆ THÔNG TIN
+	
+	BỘ MÔN KHOA HỌC MÁY TÍNH
 	\titlepage
 \end{frame}
 
@@ -270,6 +272,13 @@
 	\end{figure}
 \end{frame}
 \subsection{Xây dựng thực nghiệm với \textbf{tiếng Anh}}
+\begin{frame}{Phân chia train, test từ tập dữ liệu TIMIT}
+	Bộ dữ liệu train (huấn luyện) và test (kiểm tra) được giữ nguyên theo cài đặt của nhóm tác giả. Nhóm thực hiện chạy thử và đánh giá mô hình dựa vào độ lỗi phân lớp FER trong tác vụ định danh người nói. Giả định những có hai loại người vị trí số chẵn và lẻ để thực hiện đánh giá xác minh người nói
+	\begin{itemize}
+		\item Tập train: 2310 file âm thanh
+		\item Tập test: gồm 1386 file âm thanh
+	\end{itemize}
+\end{frame}
 \begin{frame}{Sử dụng tập dữ liệu TIMIT}
 	Các thông số mô hình khi sử dụng tập TIMIT
 	\begin{itemize}
@@ -281,16 +290,23 @@
 	\end{itemize}
 \end{frame}
 \begin{frame}{Sử dụng tập dữ liệu TIMIT}
-	Các Hyper parameters
+	Các Hyper parameters của mô hình
 	\begin{itemize}
-		\item learning rate $\text{lr} = 0.001$
+		\item Tốc độ học - learning rate $\text{lr} = 0.001$
 		\item $\alpha = 0.95$
 		\item $\epsilon = 10^{-7}$
-		\item $\text{batch\_size}=128$
-		\item $\text{N\_epochs}=100$
-		\item $\text{N\_batches}=800$
-		\item $\text{N\_eval\_epoch}=8$
+		\item Kích thước mỗi batch $\text{batch\_size}=128$
+		\item Số lượng epochs training $\text{N\_epochs}=100$
+		\item Số lượng batch $\text{N\_batches}=800$
+		\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=8$
 		\item $\text{seed}=1234$
+	\end{itemize}
+\end{frame}
+\begin{frame}{Phân chia train, test từ tập dữ liệu Librispeech}
+	Bộ dữ liệu train (huấn luyện) và test (kiểm tra) được giữ nguyên theo cài đặt của nhóm tác giả. Nhóm thực hiện chạy thử và đánh giá mô hình dựa vào độ lỗi phân lớp FER trong tác vụ định danh người nói. Giả định những có hai loại người vị trí số chẵn và lẻ để thực hiện đánh giá xác minh người nói
+	\begin{itemize}
+		\item Tập train: 14481 file âm thanh
+		\item Tập test: gồm 7452 file âm thanh
 	\end{itemize}
 \end{frame}
 \begin{frame}{Sử dụng tập dữ liệu Librispeech}
@@ -299,26 +315,39 @@
 		\item Các cửa sổ có $\text{fs} = 8000$, tín hiệu được cắt thành những chunks với $\text{cw\_len}=375$, overlap $\text{cw\_shift}=10$s
 		\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
 		\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
-		\item Hai lớp DNN: sử dụng 2 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU làm activation cho lớp DNN thứ nhất, lớp kia dùng linear
-		\item Lớp Output: 2 lớp Multi Layer Perceptron, 2048 nodes cho mỗi lớp, không dropout, Layer Norm cho input, Batch Norm cho output, hàm activation function lớp thứ nhất dùng leaky-ReLU, lớp thứ hai dùng softmax
+		\item Hai lớp DNN: sử dụng 2 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU làm activation cho lớp DNN thứ nhất, lớp kia dùng Linear
+		\item Lớp Output: 2 lớp MLP, 2048 nodes lớp 1 và 2484 nodes lớp 2, không dropout, Layer Norm cho input, Batch Norm cho output, activation ReLU lớp thứ nhất , Softmax lớp thứ hai 
 	\end{itemize}
 \end{frame}
 \begin{frame}{Sử dụng tập dữ liệu Librispeech}
-		Các Hyper parameters
+		Các Hyper parameters của mô hình
 		\begin{itemize}
-			\item \item learning rate $\text{lr} = 0.001$
+			\item Tốc độ học - learning rate $\text{lr} = 0.001$
 			\item $\alpha = 0.95$
 			\item $\epsilon = 10^{-7}$
-			\item $\text{batch\_size}=128$
-			\item $\text{N\_epochs}=100$
-			\item $\text{N\_batches}=100$
-			\item $\text{N\_eval\_epoch}=10$
+			\item Kích thước mỗi batch $\text{batch\_size}=128$
+			\item Số lượng epochs training $\text{N\_epochs}=100$
+			\item Số lượng batch $\text{N\_batches}=100$
+			\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=10$
 			\item $\text{reg\_factor}=1000$
 			\item $\text{fact\_amp=0.2}$
 			\item $\text{seed}=1234$
 		\end{itemize}
 \end{frame}
 \subsection{Xây dựng thực nghiệm với \textbf{tiếng Việt}}
+\begin{frame}{Phân chia train, test từ tập dữ liệu Son et al. Dataset}
+	Do bị lỗi file âm thanh nên nhóm bỏ 1 số file bị lỗi từ tập dữ liệu và bổ sung thêm 20 (Long \& Short) file do nhóm tự ghi âm sẵn bằng microphone.
+	
+	Tập dữ liệu sao khi kiểm tra gồm có 19 người nói, mỗi người thu hai loại file, 10 file âm ngắn, 10 file âm dài.
+	
+	Nhóm thực hiện chạy thử và đánh giá mô hình dựa vào độ lỗi phân lớp FER trong tác vụ định danh người nói. Giả định những có hai loại người vị trí số chẵn và lẻ để thực hiện đánh giá xác minh người nói.
+	\begin{itemize}
+		\item Tập train: mỗi người chọn ra 5 file đầu tiên làm file huấn luyện
+		\item Tập test: mỗi người chọn ra 2 file tiếp theo làm file kiểm tra
+		\item Tập validation: phần còn lại, dùng để tính toán d-vector
+	\end{itemize}
+
+\end{frame}
 \begin{frame}{Sử dụng tập dữ liệu Son et al. Dataset}
 	Các thông số mô hình khi sử dụng tập Son et al. Dataset
 	\begin{itemize}
@@ -326,44 +355,37 @@
 		\item Lớp Input: sử dụng 80 bộ lọc SincNet có kích thước $L=251$, max pool - 3, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
 		\item Hai lớp CNN: sử dụng 2 lớp CNN, với mỗi lớp dùng 60 bộ lọc có kích thuốc $L=5$, sử dụng Layer Norm cho cả input và output, không dùng Batch Norm, hàm kích hoạt activation leaky-ReLU, dropout = 0
 		\item Ba lớp DNN: sử dụng 3 lớp DNN (Multi Layer Perceptron) fully-connected với 2048 neurons, Layer Norm cho input, Batch Norm cho output, các lớp ẩn (hidden layers) dùng leaky-ReLU
-		\item Lớp Output: Multi Layer Perceptron, 18 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax
+		\item Lớp Output: Multi Layer Perceptron, 19 nodes, không dropout, không LayerNorm, không BatchNorm cho cả input và output, hàm activation function dùng softmax
 	\end{itemize}
 \end{frame}
 \begin{frame}{Sử dụng tập dữ liệu Son et al. Dataset}
-	Các Hyper parameters
+	Các Hyper parameters của mô hình
 	\begin{itemize}
 		\item Tốc độ học - learning rate $\text{lr} = 0.001$
 		\item $\alpha = 0.95$
 		\item $\epsilon = 10^{-7}$
-		\item Kích thước batch norm $\text{batch\_size}=128$
+		\item Kích thước mỗi batch $\text{batch\_size}=128$
 		\item Số lượng epochs training $\text{N\_epochs}=300$
 		\item Số lượng batch $\text{N\_batches}=100$
 		\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=1$
 		\item $\text{seed}=1234$
 	\end{itemize}
 \end{frame}
-\section{Đăng ký - Enrollment}
-\subsection{Đăng ký mô hình \textbf{tiếng Anh}}
-\begin{frame}{Tính toán d-vector}
-	Thông số mô hình tính toán d-vector
-\end{frame}
-\begin{frame}{So sánh hai d-vector}
-	Triển khai sử dụng độ đo cosine trong so sánh d-vector và phân ngưỡng
-\end{frame}
-\begin{frame}{Dự đoán từ mô hình}
-	
-\end{frame}
-\subsection{Đăng ký mô hình \textbf{tiếng Việt}}
-\begin{frame}{Tính toán d-vector}
-		Thông số mô hình tính toán d-vector
-\end{frame}
-\begin{frame}{So sánh hai d-vector}
-	Triển khai sử dụng độ đo cosine trong so sánh d-vector và phân ngưỡng
-\end{frame}
-\begin{frame}{Dự đoán từ mô hình}
-	
-\end{frame}
 \section{Đánh giá mô hình}
+\begin{frame}{Đánh giá mô hình}
+	Các độ đo đánh giá mô hình
+	\begin{itemize}
+		\item Tác vụ Speaker Identification
+		\begin{itemize}
+			\item FER - Frame Error Rate
+			\item CER - Classification Error Rate
+		\end{itemize}
+		\item Tác vụ Speaker Verification
+		\begin{itemize}
+			\item EER - Equal Error Rate
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 \subsection{Đánh giá mô hình \textbf{tiếng Anh}}
 \begin{frame}{Kết quả đánh giá mô hình}
 	Các kết quả khi đánh giá mô hình bằng tập TIMIT
@@ -379,6 +401,31 @@
 		\label{fig:writing-thesis}
 	\end{figure}
 \end{frame}
+\begin{frame}{SincNet on TIMIT Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_timit.png}
+				\caption{Đồ thị PR Curve TIMIT Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item AP = 0.99
+		\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_timit.png}
+				\caption{Đồ thị ROC Curve TIMIT Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item EER = 0.0086
+			\item AUC = 0.99
+		\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
 \begin{frame}{Kết quả đánh giá mô hình}
 	Các kết quả khi đánh giá mô hình bằng tập Librispeech
 	\begin{itemize}
@@ -387,11 +434,36 @@
 		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.456924$
 	\end{itemize}
 \end{frame}
-\begin{frame}{Librispeech Training Result Visualization}
+\begin{frame}{SincNet on Librispeech Training Result Visualization}
 	\begin{figure}[H]
 		\includegraphics[width=0.8\linewidth]{result/sincnet_librispeech_plot.png}
 		\label{fig:writing-thesis}
 	\end{figure}
+\end{frame}
+\begin{frame}{SincNet on Librispeech Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_librispeech.png}
+				\caption{Đồ thị PR Curve Librispeech Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item AP = 0.73
+		\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_librispeech.png}
+				\caption{Đồ thị ROC Curve Librispeech Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item EER = 0.22
+			\item AUC = 0.78
+		\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 \subsection{Đánh giá mô hình \textbf{tiếng Việt}}
 \begin{frame}{Kết quả đánh giá mô hình}
@@ -402,14 +474,54 @@
 		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.000000$
 	\end{itemize}
 \end{frame}
-\begin{frame}{Son et al. Dataset Training Result Visualization}
+\begin{frame}{SincNet on Son et al. Dataset Training Result Visualization}
 	\begin{figure}[H]
 		\includegraphics[width=0.8\linewidth]{result/sincnet_vietnamese_plot.png}
 		\label{fig:writing-thesis}
 	\end{figure}
 \end{frame}
+\begin{frame}{SincNet on Son et al. Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_vietnamese.png}
+				\caption{Đồ thị PR Curve Son et al. Dataset Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item AP = 1.0
+		\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_vietnamese.png}
+				\caption{Đồ thị ROC Curve Son et al. Dataset Dataset}
+			\end{figure}
+		Kết quả đánh giá:
+		\begin{itemize}
+			\item EER = 0.0
+			\item AUC = 1.0
+		\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
 \section{Kết luận}
-
+\begin{frame}{Tổng kết đồ án môn học}
+	\begin{itemize}
+		\item Về lý thuyết:
+		\begin{itemize}
+			\item Sinh trắc học giọng nói là một lĩnh lớn có nhiều ứng dụng, với các phương pháp truyền thống giải quyết tương đối bài toán này
+			\item Các phương pháp hiện đại sử dụng các phương pháp rút trích đặc trưng dựa vào mạng Học Sâu d-vectors đem lại nhiều kết quả khả quan, đầy mong đợi
+			\item Đặc biệt, với bài toán phân lớp giọng nói việc kết hợp đa nhiệm trở nên một hướng giải quyết tốt cho bài toán này. Ngoài ra, SincNet đem lại một làn gió mới, khi tận dụng và tối ưu lại CNN truyền thống bằng các bộ lọc hình Sinc, giúp tác vụ nhận dạng người nói có nhiều triễn vọng khi kết hợp với d-vectors, DNN-class.
+		\end{itemize} 
+		\item Về thực hành:
+		\begin{itemize}
+			\item Nhóm đã thực hiện thu thập dữ liệu, huấn luyện cơ bản, nắm cách hoạt động của một Speaker Recognition Pipeline
+			\item Đọc hiểu source code Pytorch implement SincNet của tác, thiết lập và tùy chỉnh lại theo đúng với dữ liệu của nhóm
+			\item Trực quan kết quả, đạt được những kết quả tương đối tốt và gần giống với kết quả từ bài báo
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 \section{Tài liệu tham khảo}
 \begin{frame}{Tài liệu tham khảo}
 	\nocite{*}
