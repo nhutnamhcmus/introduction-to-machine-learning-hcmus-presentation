@@ -170,13 +170,13 @@
 		\end{itemize}
 		\item Hyper parameters
 		\begin{itemize}
-			\item learning rate $\text{lr} = 0.001$
+			\item Tốc độ học - learning rate $\text{lr} = 0.001$
 			\item $\alpha = 0.95$
 			\item $\epsilon = 10^{-7}$
-			\item $\text{batch\_size}=128$
-			\item $\text{N\_epochs}=100$
-			\item $\text{N\_batches}=800$
-			\item $\text{N\_eval\_epoch}=8$
+			\item Kích thước mỗi batch $\text{batch\_size}=128$
+			\item Số lượng epochs training $\text{N\_epochs}=100$
+			\item Số lượng batch $\text{N\_batches}=800$
+			\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=8$
 			\item $\text{seed}=1234$
 		\end{itemize}
 		\item Đánh giá mô hình
@@ -203,13 +203,13 @@
 		\end{itemize}
 		\item Hyper parameters
 		\begin{itemize}
-			\item learning rate $\text{lr} = 0.001$
+			\item Tốc độ học - learning rate $\text{lr} = 0.001$
 			\item $\alpha = 0.95$
 			\item $\epsilon = 10^{-7}$
-			\item $\text{batch\_size}=128$
-			\item $\text{N\_epochs}=100$
-			\item $\text{N\_batches}=100$
-			\item $\text{N\_eval\_epoch}=10$
+			\item Kích thước mỗi batch $\text{batch\_size}=128$
+			\item Số lượng epochs training $\text{N\_epochs}=100$
+			\item Số lượng batch $\text{N\_batches}=100$
+			\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=10$
 			\item $\text{reg\_factor}=1000$
 			\item $\text{fact\_amp=0.2}$
 			\item $\text{seed}=1234$
@@ -239,25 +239,23 @@
 		\end{itemize}
 		\item Hyper parameters
 		\begin{itemize}
-			\item learning rate $\text{lr} = 0.001$
+			\item Tốc độ học - learning rate $\text{lr} = 0.001$
 			\item $\alpha = 0.95$
 			\item $\epsilon = 10^{-7}$
-			\item $\text{batch\_size}=128$
-			\item $\text{N\_epochs}=300$
-			\item $\text{N\_batches}=100$
-			\item $\text{N\_eval\_epoch}=1$
+			\item Kích thước mỗi batch $\text{batch\_size}=128$
+			\item Số lượng epochs training $\text{N\_epochs}=300$
+			\item Số lượng batch $\text{N\_batches}=100$
+			\item Số đánh giá mỗi epoch $\text{N\_eval\_epoch}=1$
 			\item $\text{seed}=1234$
 		\end{itemize}
 		\item Đánh giá mô hình
 		\begin{itemize}
-			\item FER (Frame Error Rate)
-			\item CER (Classification Error Rate)
-			\item EER (Equal Error Rate)
+			\item FER (Frame Error Rate): độ đo tính toán sự sai khác giữa kết quả dự đoán (predicted value) của mô hình so với kết quả thật sự (actual value) của một đoạn tín hiệu.
+			\item CER (Classification Error Rate): thể hiện độ lỗi phân loại của mô hình. CER càng thấp chứng tỏ khả năng phân loại của mô hình càng cao.
+			\item EER (Equal Error Rate): thể hiện khả năng xác minh danh tính của một mô hình nhận dạng (giọng nói). EER càng thấp chứng tỏ khả năng xác minh danh tính càng cao
 		\end{itemize}
-	\end{itemize}
-	\section{4. Đăng ký}
-	
-	\section{5. Đánh giá mô hình}
+	\end{itemize}	
+	\section{4. Đánh giá mô hình}
 	\subsection{Các độ đo}
 	Nhóm sử dụng môt số độ đo trong việc đánh giá mô hình như sau
 	\begin{itemize}
@@ -358,8 +356,21 @@
 		\caption{Đồ thị PR Curve Son et al. Dataset Dataset}
 		\label{fig:writing-thesis}
 	\end{figure}
-	\section{6. Kết luận}
-	
+	\section{5. Kết luận}
+	\begin{itemize}
+		\item Về lý thuyết:
+		\begin{itemize}
+			\item Sinh trắc học giọng nói là một lĩnh lớn có nhiều ứng dụng, với các phương pháp truyền thống giải quyết tương đối bài toán này
+			\item Các phương pháp hiện đại sử dụng các phương pháp rút trích đặc trưng dựa vào mạng Học Sâu d-vectors đem lại nhiều kết quả khả quan, đầy mong đợi
+			\item Đặc biệt, với bài toán phân lớp giọng nói việc kết hợp đa nhiệm trở nên một hướng giải quyết tốt cho bài toán này. Ngoài ra, SincNet đem lại một làn gió mới, khi tận dụng và tối ưu lại CNN truyền thống bằng các bộ lọc hình Sinc, giúp tác vụ nhận dạng người nói có nhiều triễn vọng khi kết hợp với d-vectors, DNN-class.
+		\end{itemize} 
+		\item Về thực hành:
+		\begin{itemize}
+			\item Nhóm đã thực hiện thu thập dữ liệu, huấn luyện cơ bản, nắm cách hoạt động của một Speaker Recognition Pipeline
+			\item Đọc hiểu source code Pytorch implement SincNet của tác, thiết lập và tùy chỉnh lại theo đúng với dữ liệu của nhóm
+			\item Trực quan kết quả, đạt được những kết quả tương đối tốt và gần giống với kết quả từ bài báo
+		\end{itemize}
+	\end{itemize}
 	\section{7. Kế hoạch thực hiện}
 	
 	\subsection{7.1 Timeline}
