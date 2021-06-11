@@ -1,5 +1,4 @@
-%!TeX encoding = UTF-8
-%!TeX program = xelatex
+%!TeX encoding = UTF-8 Unicode
 \documentclass[notheorems, aspectratio=54]{beamer}
 % aspectratio: 1610, 149, 54, 43(default), 32
 \usepackage[utf8]{inputenc}
@@ -334,13 +333,15 @@
 	\end{figure}
 \end{frame}
 \begin{frame}{SincNet}
+	\textbf{Phương pháp thực hiện} Sincnet thực hiện các phép tích chập của nó với hàm $g$, hàm này phụ thuộc vào một tham số $\theta$.
+	
+	$$y[n] = x[n] * g[n, \theta]$$
+	
 	Với $f_1$ $f_2$ lần lượt là tần số cắt thấp (low) và cao (high) đã được học, $rect(.)$ là hàm rectangular trong miền tần số.
 	
-	$$G[f, f_1, f_2] = rect\left(\frac{f}{2f_2}\right) -  rect\left(\frac{f}{2f_1}\right)$$
-	
-	Để có thể trở lại miền thời gian được, ta sử dụng phép biến đổi Fourier Ngược. Thu được
-	
-	$$g[n, f_1, f_2] = 2f_2sinc(2\pi f_2 n) - 2f_1sinc(2\pi f_1 n)$$ 
+	\begin{gather*}
+	G[f, f_1, f_2] = rect\left(\frac{f}{2f_2}\right) -  rect\left(\frac{f}{2f_1}\right)\\ \xrightarrow{\text{Fourier Inverse}}g[n, f_1, f_2] = 2f_2sinc(2\pi f_2 n) - 2f_1sinc(2\pi f_1 n)
+	\end{gather*}
 \end{frame}
 \begin{frame}{SincNet}
 	\begin{block}{~\vspace{0.7cm}}
@@ -430,35 +431,199 @@
 \end{frame}
 
 \section{Các kết quả}
-\begin{frame}{Các kết quả đối với tác vụ Speaker Identification}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\textwidth]{images/performance_speaker_identification.png}
-	\caption{Bảng kết quả SicNet trong tác vụ nhận dạng giọng nói - SI}
-	\label{fig:writing-thesis}
-\end{figure}	
-\end{frame}
-\begin{frame}{Các kết quả đối với tác vụ Speaker Verification}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\textwidth]{images/performance_speaker_verification.png}
-	\caption{Bảng kết quả SicNet trong tác vụ xác minh giọng nói - SV}
-	\label{fig:writing-thesis}
-\end{figure}	
-\end{frame}
-\begin{frame}{Các kết quả đối với tác vụ SV i-vectors}
-	Hệ thống \textbf{i-vector} tốt nhất của nhóm tác giả đạt được \textbf{EER = 1,1\%}, \textbf{khá xa so với những gì đạt được với hệ thống DNN}.	
-\end{frame}
-\begin{frame}{Kết quả Speaker Recognition trên DIRHA}
+\begin{frame}{Các kết quả}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			Các kết quả đối với tác vụ Speaker Identification
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{images/performance_speaker_identification.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Các kết quả đối với tác vụ Speaker Verification
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{images/performance_speaker_verification.png}
+			\end{figure}
+		\end{column}
+	\end{columns}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.65\textwidth]{images/sr_sincnet_result.png}
 		\caption{Bảng kết quả Speaker Recognition SincNet trên tập DIRHA}
 		\label{fig:writing-thesis}
-	\end{figure}
-	SincNet hoạt động rất tốt trên DIRHA, so với các kỹ thuật khác, nó luôn có độ lỗi thấp nhất.	
+	\end{figure}	
 \end{frame}
-
+\section{Thực nghiệm với SincNet}
+\subsection{Chuẩn bị dữ liệu - Data Preparation}
+\begin{frame}{Chuẩn bị dữ liệu}
+	Dữ liệu giọng nói Tiếng Anh
+	\begin{itemize}
+		\item TIMIT
+		\item LibriSpeech
+	\end{itemize}
+	Dữ liệu giọng nói Tiếng Việt
+	\begin{itemize}
+		\item Son et al. Dataset + Tự ghi âm bằng micro phone
+	\end{itemize}
+\end{frame}
+\subsection{Phân chia train, test}
+\begin{frame}
+	Đối với tập TIMIT, Librispeech:  giữ nguyên theo cài đặt của nhóm tác giả
+	
+	Đối với Son et al. Dataset
+	\begin{itemize}
+		\item Tập train: mỗi người chọn ra 5 file đầu tiên làm file huấn luyện
+		\item Tập test: mỗi người chọn ra 2 file tiếp theo làm file kiểm tra
+		\item Tập validation: phần còn lại, dùng để tính toán d-vector
+	\end{itemize}
+\end{frame}
+\subsection{Thông số mô hình}
+\begin{frame}
+	Các thông số mô hình khi sử dụng tập TIMIT, Librispeech được giữ nguyên theo cách cài đặt của tác giả, 100 epochs training
+	
+	Đối với Son et al. Dataset
+	\begin{itemize}
+		\item Cửa sổ có $\text{fs} = 16000$, chunks tín hiệu $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
+		\item Input: 80 bộ lọc SincNet, $L=251$, max pool=3, LayerNorm Input và Output, không BatchNorm, leaky-ReLU, dropout=0
+		\item Hai lớp CNN: 60 bộ lọc, $L=5$, LayerNorm Input và Output, không BatchNorm, leaky-ReLU, dropout=0
+		\item Ba lớp DNN: 2048 neurons, Layer Norm cho input, Batch Norm cho output, leaky-ReLU
+		\item Output: 19 nodes, không dropout, không LayerNorm, không BatchNorm, softmax
+		\item Tốc độ học - learning rate $\text{lr} = 0.001$
+		\item Số lượng epochs training $\text{N\_epochs}=300$
+	\end{itemize}
+\end{frame}
+\subsection{Đánh giá mô hình}
+\begin{frame}{Đánh giá mô hình}
+	Các độ đo đánh giá mô hình
+	\begin{itemize}
+		\item Tác vụ Speaker Identification
+		\begin{itemize}
+			\item FER - Frame Error Rate
+			\item CER - Classification Error Rate
+		\end{itemize}
+		\item Tác vụ Speaker Verification
+		\begin{itemize}
+			\item EER - Equal Error Rate
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập TIMIT
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=4.217127$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.513561$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.018038$
+	\end{itemize}
+\end{frame}
+\begin{frame}{TIMIT Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_timit_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\begin{frame}{SincNet on TIMIT Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_timit.png}
+				\caption{Đồ thị PR Curve TIMIT Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item AP = 0.99
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_timit.png}
+				\caption{Đồ thị ROC Curve TIMIT Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item EER = 0.0086
+				\item AUC = 0.99
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập Librispeech
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=5.448840$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.907977$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.456924$
+	\end{itemize}
+\end{frame}
+\begin{frame}{SincNet on Librispeech Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_librispeech_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\begin{frame}{SincNet on Librispeech Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_librispeech.png}
+				\caption{Đồ thị PR Curve Librispeech Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item AP = 0.73
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_librispeech.png}
+				\caption{Đồ thị ROC Curve Librispeech Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item EER = 0.22
+				\item AUC = 0.78
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}{Kết quả đánh giá mô hình}
+	Các kết quả khi đánh giá mô hình bằng tập Son et al. Dataset
+	\begin{itemize}
+		\item Độ lỗi huấn luyện trung bình mỗi frame $loss\_tr=0.113859$
+		\item Giá trị phân lớp sai mức frame $err\_te=0.031011$
+		\item Giá trị phân lớp sai mức câu $err\_te\_snt =0.000000$
+	\end{itemize}
+\end{frame}
+\begin{frame}{SincNet on Son et al. Dataset Training Result Visualization}
+	\begin{figure}[H]
+		\includegraphics[width=0.8\linewidth]{result/sincnet_vietnamese_plot.png}
+		\label{fig:writing-thesis}
+	\end{figure}
+\end{frame}
+\begin{frame}{SincNet on Son et al. Dataset Training Result Visualization}
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/pr_curve_vietnamese.png}
+				\caption{Đồ thị PR Curve Son et al. Dataset Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item AP = 1.0
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\includegraphics[width=0.9\linewidth]{result/roc_curve_vietnamese.png}
+				\caption{Đồ thị ROC Curve Son et al. Dataset Dataset}
+			\end{figure}
+			Kết quả đánh giá:
+			\begin{itemize}
+				\item EER = 0.0
+				\item AUC = 1.0
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
 \section{Kết luận}
 \begin{frame}{Kết luận}
 	Về SincNet Architecture
@@ -471,14 +636,6 @@
 	Nhưng vẫn có hạn chế
 	\begin{itemize}
 		\item DNN-class tuy có EER thấp nhưng đánh đổi nhiều sự linh hoạt so với d-vectors
-	\end{itemize}
-\end{frame}
-\begin{frame}{Kế hoạch dự kiến cuối kỳ}
-	\begin{itemize}
-		\item Chuẩn bị dữ liệu (cho tiếng Anh và \textbf{tiếng Việt}).
-		\item Xây dựng mô hình.
-		\item Trực quan hóa, đánh giá mô hình.
-		\item Nhận xét những kết quả làm được.
 	\end{itemize}
 \end{frame}
 
