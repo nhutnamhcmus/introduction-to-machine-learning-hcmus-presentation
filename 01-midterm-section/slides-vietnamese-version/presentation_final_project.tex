@@ -198,7 +198,7 @@
 %
 \author{Vương Gia Bảo, Nguyễn Viết Dũng\newline Ngô Xuân Kiên, Lê Nhựt Nam}
 \title{NHẬP MÔN MÁY HỌC \newline SPEAKER RECOGNITION FROM \newline RAW WAVEFORM WITH SINCNET}
-\institute{Đại học Khoa học Tự nhiên, Đại học Quốc gia TP HCM} 
+\institute{Đại học Khoa học Tự nhiên, Đại học Quốc gia TP HCM\newline Khoa Công nghệ Thông tin, Bộ môn Khoa học Máy tính} 
 
 
 %
@@ -233,10 +233,9 @@
 \section{Động lực nghiên cứu khoa học}
 \begin{frame}{Động lực nghiên cứu khoa học}
 	\begin{itemize}
-		\item Về lĩnh vực Nhận dạng giọng nói, đây là một lĩnh vực nghiên cứu có nhiều ứng dụng vào thực tiễn đời sống như xác thực sinh trắc học, pháp y, bảo mật, nhận dạng giọng nói và phân cực giọng nói.
-		\item Các phương pháp SOTA dựa trên việc biểu diễn i-vectors của những đoạn
-		giọng nói, cải thiện đáng kể so với mô hình Gaussian Mixture Model-Universal Background Models
-		\item Sự phát triển của Deep Neural Networks
+		\item Lĩnh vực nghiên cứu Nhận dạng giọng nói.
+		\item Những phương pháp THE STATE OF THE ART trước đây
+		\item Sự phát triển của Deep Learning
 	\end{itemize}
 \end{frame}
 
@@ -258,20 +257,22 @@
 \end{frame}
 \section{Giới thiệu về bài báo}
 \begin{frame}{Giới thiệu về bài báo}
+	Tên bài báo: Speaker Recognition from raw waveform with SincNet
+	
+	Nhóm tác giả: Mirco Ravanelli, Yoshua Bengio
 	\begin{itemize}
-		\item Bài báo đề xuất một kiến trúc mạng CNN (Convolutional Neural Networks) mới, khai phá lớp tích chập đầu tiên để khám phá nhiều thông tin hơn - SincNet.
-		\item SincNet dựa trên các hàm sinc được tham số hóa, để cài đặt các bộ lọc băng thông.
-		\item Ngược lại với CNNs chuẩn, học tất cả các phần tử của mỗi bộ lọc filter, ở đây, SincNet chỉ dùng các tần số cắt thấp và cao học trực tiếp dữ liệu với phương pháp đề xuất.
-		\item Nhỏ gọn và hiệu quả trong việc tùy chỉnh với ứng dụng mà chúng ta muốn.
-		\item Sự kết hợp tuyệt vời giữa Học máy (Machine Learning) và Xử lý Tín hiệu số (Digital
-		Signal Processing).
+		\item Đề xuất một \textbf{kiến trúc CNNs mới}.
+		\item Dùng các hàm \textbf{sinc} được tham số hoá và bộ lọc băng thông
+		\item Chỉ dùng các tần số cắt thấp và cao học \textbf{trực tiếp từ dữ liệu} với phương pháp đề xuất.
+		\item \textbf{Nhỏ gọn} và \textbf{hiệu quả} trong việc tùy chỉnh với ứng dụng mà chúng ta muốn.
+		\item Sự kết hợp tuyệt vời giữa \textbf{Học máy} và \textbf{Xử lý Tín hiệu Số}.
 	\end{itemize}
 \end{frame}
 
 \section{Vấn đề khi xử lý tín hiệu giọng nói}
 \begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
 	\begin{itemize}
-		\item Dữ liệu với số chiều cao
+		\item Dữ liệu đầu vào
 		\begin{figure}[H]
 			\includegraphics[width=1\linewidth]{images/capture_01.png}
 			\caption{A brief introduction to SincNet - Mirco Ravanelli}
@@ -281,7 +282,7 @@
 \end{frame}
 \begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
 	\begin{itemize}
-		\item Những đặc trưng giọng nói có thể bị mất đi trong quá trình xử lý sóng thô.
+		\item \textbf{Đặc trưng giọng nói có thể bị mất đi} trong quá trình xử lý sóng thô.
 		\begin{figure}[H]
 			\includegraphics[width=0.9\linewidth]{images/perceptual_evidence.png}
 			\caption{A brief introduction to SincNet - Mirco Ravanelli}
@@ -291,7 +292,7 @@
 \end{frame}
 \begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
 	\begin{itemize}
-		\item Sự biến mất độ dốc đạo hàm - vanishing gradient
+		\item Sự biến mất độ dốc đạo hàm - \textbf{vanishing gradient}
 		\begin{figure}[H]
 			\includegraphics[width=0.75\linewidth]{images/Vanishing-Gradients-in-DNN.png}
 			\caption{Vanishing Gradient problem in Deep Neural Networks}
@@ -301,7 +302,7 @@
 \end{frame}
 \begin{frame}{Vấn đề khi xử lý tín hiệu giọng nói}
 	\begin{itemize}
-		\item Các bộ lọc CNNs thường có những hình dạng đa băng tần không hợp lý, khó hiểu với con người.
+		\item Các bộ lọc CNNs thường có những \textbf{hình dạng đa băng tần không hợp lý}, khó hiểu.
 		\begin{figure}[H]
 			\includegraphics[width=0.9\linewidth]{images/interpretability_problems.png}
 			\caption{A brief introduction to SincNet - Mirco Ravanelli}
@@ -318,14 +319,13 @@
 			\begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
 				\textcolor{white}{\bf Standard CNN} & \textcolor{white}{\bf SincNet} \\\\
 				 $y[n] = x[n] * h[n]$ & $y[n] = x[n] * g[n, \theta]$\\
-				 Học từ tất cả các phần tử của mỗi filter & Chỉ học từ tham số $\theta$ của một kernel được định nghĩa từ trước\\
 			\end{tabular}
 		\end{center}
 	\end{block}
 	\textbf{Vấn đề đặt ra: Làm thế nào để chọn được hàm $g(.)$?}
 \end{frame}
 \begin{frame}{SincNet}
-	Ý tưởng để xây dựng hàm $g(.)$ đến từ Xử lý tín hiệu số, dựa trên bộ lọc băng thông (\textbf{band-pass filters}), chỉ có tần số cắt thấp và cao (low-high cutoff frequencies) được học
+	Ý tưởng để xây dựng hàm $g(.)$: dựa trên bộ lọc băng thông (\textbf{band-pass filters}), chỉ có tần số cắt thấp và cao (low-high cutoff frequencies) được học.
 	\begin{figure}[H]
 		\includegraphics[width=0.9\linewidth]{images/band_passfilters.png}
 		\caption{A brief introduction to SincNet - Mirco Ravanelli}
@@ -333,7 +333,7 @@
 	\end{figure}
 \end{frame}
 \begin{frame}{SincNet}
-	\textbf{Phương pháp thực hiện} Sincnet thực hiện các phép tích chập của nó với hàm $g$, hàm này phụ thuộc vào một tham số $\theta$.
+	\textbf{Phương pháp thực hiện} Sincnet thực hiện các phép tích chập của nó với hàm $g$, hàm này phụ thuộc vào các tham số $\theta$.
 	
 	$$y[n] = x[n] * g[n, \theta]$$
 	
@@ -344,6 +344,7 @@
 	\end{gather*}
 \end{frame}
 \begin{frame}{SincNet}
+	So sánh hình dạng các bộ lọc giữa CNN Filters và SincNet Filters
 	\begin{block}{~\vspace{0.7cm}}
 		\begin{center}
 			\vspace{-0.8cm}
@@ -365,12 +366,12 @@
 	\begin{columns}
 		\begin{column}{0.47\textwidth}
 			\begin{figure}[H]
-				\includegraphics[width=0.9\linewidth]{images/SincNet.png}
+				\includegraphics[width=1\linewidth]{images/SincNet.png}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 		\begin{itemize}
-			\item Tính hội tụ nhanh: Khả năng hội tụ nhanh hơn CNN, ngay từ những epochs đầu tiên.
+			\item Tính hội tụ nhanh
 			\begin{figure}[H]
 				\includegraphics[width=0.9\linewidth]{images/fast_convergence.png}
 				\caption{Learning curves}
@@ -389,9 +390,9 @@
 		\begin{column}{0.5\textwidth}
 			Tính hiệu quả
 			\begin{figure}[H]
-				\includegraphics[width=0.35\linewidth]{images/g_symmetric.png}
+				\includegraphics[width=0.75\linewidth]{images/g_symmetric.png}
+				\caption{Kernel đối xứng}
 			\end{figure}
-			Các hàm kernel $g(.)$ là đối xứng nên chỉ cần thực hiện phép tích chập trên một phần filter $\Leftrightarrow$ Điều này sẽ tiết kiệm 50\% việc tính toán.
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -404,7 +405,6 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			Cần ít tham số cho việc huấn luyện mô hình. \newline
-			Giả sử ta gọi: $F$ là số bộ lọc filters, $L$ kích thước của mỗi bộ lọc  filters
 			\begin{itemize}
 				\item Với CNN, số tham số là $parameters = F * L$
 				\item Với SincNet, số tham số là $parameters = 2F$
@@ -421,9 +421,9 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Tính diễn giải: Biểu đồ đáp ứng xung tích lũy của SincNet cho thấy nhiều đặc trưng quan trọng của giọng nói. 
+				\item Tính diễn giải
 				\begin{figure}[H]
-					\includegraphics[width=0.9\linewidth]{images/interpretability.png}
+					\includegraphics[width=1\linewidth]{images/interpretability.png}
 				\end{figure}
 			\end{itemize}
 		\end{column}
@@ -454,7 +454,7 @@
 	\end{figure}	
 \end{frame}
 \section{Thực nghiệm với SincNet}
-\subsection{Chuẩn bị dữ liệu - Data Preparation}
+\subsection{Chuẩn bị dữ liệu}
 \begin{frame}{Chuẩn bị dữ liệu}
 	Dữ liệu giọng nói Tiếng Anh
 	\begin{itemize}
@@ -479,17 +479,12 @@
 \end{frame}
 \subsection{Thông số mô hình}
 \begin{frame}
-	Các thông số mô hình khi sử dụng tập TIMIT, Librispeech được giữ nguyên theo cách cài đặt của tác giả, 100 epochs training
+	Các thông số mô hình của nhóm tương tự như thông số được tác giả hướng dẫn từ bài báo
 	
-	Đối với Son et al. Dataset
+	Số lượng epoch dùng cho việc huấn luyện
 	\begin{itemize}
-		\item Cửa sổ có $\text{fs} = 16000$, chunks tín hiệu $\text{cw\_len}=200$, overlap $\text{cw\_shift}=10$s
-		\item Input: 80 bộ lọc SincNet, $L=251$, max pool=3, LayerNorm Input và Output, không BatchNorm, leaky-ReLU, dropout=0
-		\item Hai lớp CNN: 60 bộ lọc, $L=5$, LayerNorm Input và Output, không BatchNorm, leaky-ReLU, dropout=0
-		\item Ba lớp DNN: 2048 neurons, Layer Norm cho input, Batch Norm cho output, leaky-ReLU
-		\item Output: 19 nodes, không dropout, không LayerNorm, không BatchNorm, softmax
-		\item Tốc độ học - learning rate $\text{lr} = 0.001$
-		\item Số lượng epochs training $\text{N\_epochs}=300$
+		\item TIMIT, Librispeech: 100 epochs
+		\item Son Dataset: 300 epochs
 	\end{itemize}
 \end{frame}
 \subsection{Đánh giá mô hình}
@@ -507,6 +502,7 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+\subsection{Kết quả thực nghiệm}
 \begin{frame}{Kết quả đánh giá mô hình}
 	Các kết quả khi đánh giá mô hình bằng tập TIMIT
 	\begin{itemize}
@@ -628,10 +624,10 @@
 \begin{frame}{Kết luận}
 	Về SincNet Architecture
 	\begin{itemize}
-		\item Cơ sở lý thuyết Toán học vững vàng: Kỹ thuật band-pass filter, Window trong Xử lý tín hiệu số.
-		\item Tính toán nhanh và gọn nhẹ: Như đã nói, đây là một đặc điểm của SincNet nhờ vào dùng ít tham số, kernel đối xứng.
+		\item Cơ sở lý thuyết Toán học vững vàng.
+		\item Tính toán nhanh và gọn nhẹ.
 		\item Kết hợp với Deep Learning một cách hiệu quả.
-		\item Sử dùng DNN-Class trong đánh giá, cho kết quả đầy hứa hẹn, có độ lỗi EER thấp
+		\item Sử dùng DNN-Class trong đánh giá, cho kết quả đầy hứa hẹn, có độ lỗi EER thấp.
 	\end{itemize}
 	Nhưng vẫn có hạn chế
 	\begin{itemize}
